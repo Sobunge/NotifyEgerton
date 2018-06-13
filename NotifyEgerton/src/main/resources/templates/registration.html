@@ -12,13 +12,16 @@
             <section id="loginSection">
                 <h1 class="text-uppercase text-center"> REGISTRATION </h1></section><img th:src="@{/img/avatar_2x.png}" class="profile-img-card">
             <p class="profile-name-card"> </p>
-            <form class="form-signin"><span class="reauth-email"> </span>
-                <input class="form-control" type="text" placeholder="Full Name">
-                <input class="form-control" type="text" placeholder="Username">
-                <input class="form-control" type="email" required="" placeholder="Email address" autofocus="" id="inputEmail">
+            <form class="form-signin" method="post"><span class="reauth-email"> </span>
+                <input class="form-control" type="text" placeholder="First Name" name="firstname">
+                <input class="form-control" type="text" placeholder="Second Name" name="secondname">
+                <input class="form-control" type="text" placeholder="Third Name" name="thirdname">
+                <input class="form-control" type="text" placeholder="Username" name="username">
                 <input class="form-control" type="password" required="" placeholder="Password" id="inputPassword">
-                <input class="form-control" type="text" placeholder="Repeat Password">
-                <input class="form-control" type="text" placeholder="Category">
+                <input class="form-control" type="password" required="" placeholder="Repeat Password" id="inputPassword" name="password">
+                <input class="form-control" type="text" placeholder="Gender" name="gender">
+                <input class="form-control" type="email" required="" placeholder="Email address" autofocus="" id="inputEmail" name="email">
+                <input class="form-control" type="text" placeholder="Category" name="category">
                 <div class="checkbox">
                     <div class="checkbox">
                         <label>

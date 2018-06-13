@@ -26,6 +26,10 @@ div.login-card h1.text-center{
   margin-bottom:30px;
 }
 
+#loginSection h3{
+    color: green;
+}
+
 
 nav.navbar.navbar-default.navbar-fixed-top{
     height: 60px;
