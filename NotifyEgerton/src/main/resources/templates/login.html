@@ -10,11 +10,12 @@
         <div class="login-card">
             <section id="loginSection">
                 <h3 th:text="${success}"> </h3>
+                <h2 th:text="${fail}"></h2>
                 <h1 class="text-uppercase text-center">Login </h1></section><img th:src="@{/img/avatar_2x.png}" class="profile-img-card">
             <p class="profile-name-card"> </p>
-            <form class="form-signin"><span class="reauth-email"> </span>
-                <input class="form-control" type="email" required="" placeholder="Email address" autofocus="" id="inputEmail">
-                <input class="form-control" type="password" required="" placeholder="Password" id="inputPassword">
+            <form class="form-signin" method="POST"><span class="reauth-email"> </span>
+                <input class="form-control" type="text" required="" placeholder="Username" autofocus="" name="username">
+                <input class="form-control" type="password" required="" placeholder="Password" id="inputPassword" name="password">
                 <div class="checkbox">
                     <div class="checkbox">
                         <label>

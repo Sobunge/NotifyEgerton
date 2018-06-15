@@ -25,6 +25,7 @@ public class registrationController {
             String secondname, String thirdname, String username, String password,
             String gender, String email, String category, Model model) {
 
+        model.addAttribute("title", "NotifyEgerton");
         model.addAttribute("success", "You have registered successfully,login");
 
         User user = new User(firstname, secondname, thirdname, username, 

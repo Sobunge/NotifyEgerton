@@ -28,6 +28,12 @@ div.login-card h1.text-center{
 
 #loginSection h3{
     color: green;
+    text-align: center;
+}
+
+#loginSection h2{
+    color: red;
+    text-align: center;
 }
 
 

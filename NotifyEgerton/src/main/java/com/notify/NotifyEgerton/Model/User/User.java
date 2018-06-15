@@ -19,7 +19,7 @@ public class User {
 
     public User() {
     }
-
+    
     public User(String firstName, String secondName, String thirdName, String username, String password, String gender, String category, String email) {
         this.firstName = firstName;
         this.secondName = secondName;
