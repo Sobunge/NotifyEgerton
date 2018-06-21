@@ -1,5 +1,6 @@
 package com.notify.NotifyEgerton.Controllers;
 
+
 import com.notify.NotifyEgerton.Model.User.User;
 import com.notify.NotifyEgerton.Model.User.userService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,14 @@ public class registrationController {
     public String registration() {
         return "registration";
     }
-
+    
     @RequestMapping(value = "registration", method = RequestMethod.POST)
     public String processRegistrationForm(@RequestParam String firstname,
             String secondname, String thirdname, String username, String password,
             String gender, String email, String category, Model model) {
 
+        
+        
         model.addAttribute("title", "NotifyEgerton");
         model.addAttribute("success", "You have registered successfully,login");
 
