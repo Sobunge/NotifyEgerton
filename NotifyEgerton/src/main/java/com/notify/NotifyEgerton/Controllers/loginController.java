@@ -32,7 +32,8 @@ public class loginController {
         user = UserService.getUser(username).get();
 
         if (user.getPassword().equals(password)) {
-            return "homepage";
+            model.addAttribute("user", user);
+            return "redirect:/homepage";
         } else {
             model.addAttribute("fail", "The password entered is incorrect");
             return "login";
