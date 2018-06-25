@@ -8,19 +8,6 @@
 
         <title th:text="${title}"> NotifyEgerton </title>
 
-        <style>
-
-            #buttonWrapper{
-                display: flex;
-                justify-content: space-around;
-            }
-
-            #buttonMain{
-                width: 400px;
-                height: 40px;
-            }
-        </style>
-
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" type="text/css" th:href="@{./style/Pretty-Footer.css}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -46,12 +33,7 @@
                 <nav th:replace="fragments :: mainbodyHeader"></nav>
 
                 <div id="mainbody">
-                    <h2> Groups </h2>
-
-                    <div id="buttonWrapper">
-                        <input type="submit" value="Create a group" name="" id="buttonMain">
-                        <input type="submit" value="join a group" name="" id="buttonMain">
-                    </div>
+                    <h2> Create a community </h2>
 
                     <footer th:replace="fragments :: footer"></footer>
 

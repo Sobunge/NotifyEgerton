@@ -51,7 +51,7 @@
                 <h2 th:text="${title}"> NotifyEgerton </h2>
             </div>
 
-            <h5> Welcome Sobunge </h5>
+            Welcome <h5 th:text="${user.username}"> Welcome username </h5>
 
             <ul class="list-unstyled components">
                 <h3> Menu </h3>
@@ -116,7 +116,7 @@
                             <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Welcome Sobunge</a>
+                            Welcome <a class="nav-link" href="#" th:text="${user.username}"> username </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Logout</a>

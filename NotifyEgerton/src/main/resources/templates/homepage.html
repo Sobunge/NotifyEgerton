@@ -8,6 +8,18 @@
 
         <title th:text="${title}"> NotifyEgerton </title>
 
+        <style>
+
+            #buttonWrapper{
+                display: flex;
+                justify-content: space-around;
+            }
+
+            #buttonMain{
+                width: 400px;
+                height: 40px;
+            }
+        </style>
         <!-- Bootstrap CSS CDN -->
         <link rel="stylesheet" type="text/css" th:href="@{./style/Pretty-Footer.css}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -35,11 +47,19 @@
 
                 <div id="mainbody">
                     <h2> Communities </h2>
+                    <div id="buttonWrapper">
+                        <input type="submit" value="Create a community" name="" id="buttonMain">
+                        <input action="@{/community}" type="submit" value="Join a Community" name="" id="buttonMain">
+                    </div>
                     <section class="cardWrapper">
 
                     </section>
 
                     <h2> Groups </h2>
+                    <div id="buttonWrapper">
+                        <input type="submit" value="Create a group" name="" id="buttonMain">
+                        <input type="submit" value="join a group" name="" id="buttonMain">
+                    </div>
                     <section class="cardWrapper">
 
                     </section>
