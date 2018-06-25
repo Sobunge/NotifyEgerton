@@ -20,6 +20,8 @@
 
     <body>
 
+
+
         <nav class="navbar navbar-default navbar-fixed-top" th:fragment="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -67,7 +69,7 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Community </a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a href="#">Communty 1</a>
+                            <a th:href="@{/community}">Communty 1</a>
                         </li>
                         <li>
                             <a href="#">Community 2</a>

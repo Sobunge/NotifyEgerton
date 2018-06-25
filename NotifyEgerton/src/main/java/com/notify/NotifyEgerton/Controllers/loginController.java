@@ -24,7 +24,8 @@ public class loginController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String processLoginForm(@RequestParam String username, String password, Model model) {
-
+        
+        
         User user = new User();
 
         if(UserService.getUser(username).isPresent())
@@ -32,7 +33,6 @@ public class loginController {
         user = UserService.getUser(username).get();
 
         if (user.getPassword().equals(password)) {
-            model.addAttribute("user", user);
             return "redirect:/homepage";
         } else {
             model.addAttribute("fail", "The password entered is incorrect");

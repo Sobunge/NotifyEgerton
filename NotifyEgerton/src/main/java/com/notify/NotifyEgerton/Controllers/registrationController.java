@@ -25,8 +25,6 @@ public class registrationController {
     public String processRegistrationForm(@RequestParam String firstname,
             String secondname, String thirdname, String username, String password,
             String gender, String email, String category, Model model) {
-
-        
         
         model.addAttribute("title", "NotifyEgerton");
         model.addAttribute("success", "You have registered successfully,login");
