@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title th:text="${title}">NotifyEgerton</title>
+
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/style/Pretty-Footer.css}">
+<link rel="stylesheet" th:href="@{/style/Google-Style-Login.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<!-- Our Custom CSS -->
+<link rel="stylesheet" th:href="@{/style/style2.css}">
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+<!-- Font Awesome JS -->
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
+
+</head>
+
+<body>
+	<div class="wrapper">
+		<!-- Sidebar  -->
+		<nav th:replace="fragments :: sidebar"></nav>
+
+		<!-- Page Content  -->
+		<div id="content">
+
+			<nav th:replace="fragments :: mainbodyHeader"></nav>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/homepage}" class="btn-link"> Home </a></li>
+				<li><a class="active"> Add a University </a></li>
+			</ol>
+
+			<div id="mainbody">
+				<h2>Add a university</h2>
+
+				<div class="login-card">
+					<section id="loginSection">
+						<div class="alert alert-danger" th:if="${exists}">
+							<p class="text text-center">A university with that name
+								already exist !! Please select a different name</p>
+						</div>
+					</section>
+					<img th:src="@{/images/avatar_2x.png}" class="profile-img-card">
+					<p class="profile-name-card"></p>
+					<form class="form-signin" th:action="@{/addUniversity}"
+						th:object="${University}" method="post">
+						<span class="reauth-email"> </span>
+
+						<div class="form-group">
+							<label class="form-control-label"> University Name </label> <input
+								class="form-control" type="text" placeholder="University Name"
+								autofocus name="name" th:field="*{name}" id="name">
+							<div class="text text-danger"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label"> University Icon </label> <input
+								class="form-control" type="file" placeholder="University Icon"
+								autofocus name="icon" th:field="*{icon}" id="icon">
+							<div class="text text-danger"
+								th:if="${#fields.hasErrors('icon')}" th:errors="*{icon}"></div>
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label"> Privacy </label> <select
+								name="privacy" class="form-control" th:field="*{privacy}"
+								id="privacy">
+								<option value="Select Privacy ...">Select Privacy ...</option>
+								<option value="Public">Public</option>
+								<option value="Private">Private</option>
+							</select>
+							<div class="text text-danger"
+								th:if="${#fields.hasErrors('privacy')}" th:errors="*{privacy}"></div>
+						</div>
+
+						<div class="form-group">
+							<label class="form-control-label"> Description </label>
+							<textarea name="description" placeholder="Description"
+								class="form-control" th:field="*{description}" id="description"></textarea>
+							<div class="text text-danger"
+								th:if="${#fields.hasErrors('description')}"
+								th:errors="*{description}"></div>
+						</div>
+
+						<button class="btn btn-primary btn-block btn-lg btn-signin"
+							type="submit">Create</button>
+					</form>
+				</div>
+
+				<footer th:replace="fragments :: footer"></footer>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery CDN - Slim version (=without AJAX) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<!-- Popper.JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<!-- jQuery Custom Scroller CDN -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#sidebar").mCustomScrollbar({
+				theme : "minimal"
+			});
+
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar, #content').toggleClass('active');
+				$('.collapse.in').toggleClass('in');
+				$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+			});
+		});
+	</script>
+
+</body>
+
+
+</html>

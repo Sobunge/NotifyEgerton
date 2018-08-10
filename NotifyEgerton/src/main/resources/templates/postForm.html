@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title th:text="${title}">NotifyEgerton</title>
+
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" type="text/css"
+	th:href="@{/style/Pretty-Footer.css}">
+<link rel="stylesheet" th:href="@{/style/Google-Style-Login.css}" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<!-- Our Custom CSS -->
+<link rel="stylesheet" th:href="@{/style/style2.css}">
+<!-- Scrollbar Custom CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+<!-- Font Awesome JS -->
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"></script>
+<script defer
+	src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"></script>
+
+</head>
+
+<body>
+	<div class="wrapper">
+		<!-- Sidebar  -->
+		<nav th:replace="fragments :: sidebar"></nav>
+
+		<!-- Page Content  -->
+		<div id="content">
+
+			<nav th:replace="fragments :: mainbodyHeader"></nav>
+			<ol class="breadcrumb">
+				<li><a th:href="@{/homepage}" class="btn-link"> Home </a></li>
+				<li><a class="active"> Create Post </a></li>
+			</ol>
+
+			<div id="mainbody">
+
+				<!--Show this info message only if posted successfully-->
+				<div class="alert alert-info" th:if="${successMessage}"
+					th:utext="${successMessage}"></div>
+
+				<!--New Post Form-->
+				<div class="row">
+					<div
+						class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3"
+						style="margin: 0 auto; margin-top: 20px">
+						<form autocomplete="off" action="#" th:action="@{/newPost}"
+							th:object="${post}" method="post" class="form-horizontal"
+							role="form">
+
+							<h2 class="text-center">Write new post</h2>
+							<br>
+							<br>
+
+							<div class="form-group">
+								<label th:if="${#fields.hasErrors('title')}"
+									th:errors="*{title}" class="alert alert-danger"></label> <input
+									type="text" th:field="*{title}" placeholder="Title"
+									class="form-control input-lg" />
+							</div>
+
+							<div class="form-group">
+								<label th:if="${#fields.hasErrors('body')}" th:errors="*{body}"
+									class="alert alert-danger"></label>
+								<textarea th:field="*{body}" placeholder="Body"
+									class="form-control input-lg">
+									</textarea>
+							</div>
+
+							<input type="hidden" th:field="*{user}" /> <input type="hidden"
+								th:field="*{id}" />
+
+							<div class="form-group">
+								<br>
+								<br> <input type="submit" class="btn btn-primary"
+									value="Save" /> <a class="btn btn-danger" href="#"> Exit </a>
+							</div>
+
+						</form>
+					</div>
+				</div>
+
+				<!--Delete Button-->
+				<!--Dont show delete button if the post is brand new-->
+				<div class="row" th:if="${post.id}">
+					<div class="col-md-6 col-md-offset-3">
+						<form action="#" th:action="@{'/post/{id}'(id=${post.id})}"
+							th:method="delete" class="form-horizontal">
+							<div class="form-group">
+								<input type="hidden" name="_method" value="delete" />
+								<button type="submit" class="btn btn-danger btn-block"
+									th:text="Delete">Delete</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<footer th:replace="fragments :: footer"></footer>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery CDN - Slim version (=without AJAX) -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<!-- Popper.JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+	<!-- Bootstrap JS -->
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	<!-- jQuery Custom Scroller CDN -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#sidebar").mCustomScrollbar({
+				theme : "minimal"
+			});
+
+			$('#sidebarCollapse').on('click', function() {
+				$('#sidebar, #content').toggleClass('active');
+				$('.collapse.in').toggleClass('in');
+				$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+			});
+		});
+	</script>
+
+</body>
+
+
+</html>
