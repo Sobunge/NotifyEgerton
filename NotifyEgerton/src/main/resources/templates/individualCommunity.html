@@ -55,11 +55,9 @@
 						style="padding: 30px;">Community name</h1>
 
 				</div>
-				<br> <a class="btn btn-primary" th:href="@{/individualCommunity/{communityId}(communityId=${community.communityId})/postForm}"> Create Post </a>
-
-				<div th:replace="fragments :: posts"></div>
-
-				<div th:replace="fragments :: pagination(URLparameter='/home')"></div>
+				<br> <a class="btn btn-primary" href=""> Create Post </a>
+                                <a th:href="@{/Community/{communityId}/user/{username}(username=${user.username}, communityId=${community.communityId})}" th:text="join + ${user.username}" class="btn btn-primary"> Join community </a>   
+                                
 
 				<footer th:replace="fragments :: footer"></footer>
 			</div>

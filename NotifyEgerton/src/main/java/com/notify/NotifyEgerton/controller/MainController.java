@@ -53,9 +53,7 @@ public class MainController {
 				return "redirect:/login?logout";
 			}
 			else{
-				User user = new User();
-				
-				user = customeUserDetailsService.activeUser(principal.getName());
+				User user = customeUserDetailsService.activeUser(principal.getName());
 				
 				model.addAttribute("user", user);
 				
