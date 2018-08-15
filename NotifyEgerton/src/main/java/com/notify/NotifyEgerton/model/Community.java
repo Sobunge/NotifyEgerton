@@ -1,13 +1,20 @@
 package com.notify.NotifyEgerton.model;
 
+import java.util.Collection;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -39,10 +46,28 @@ public class Community {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "username", referencedColumnName = "username", nullable = false)
-    @NotNull
-    private User user;
+   
+    @ManyToMany
+    private List<User> user;
+    
+    @OneToMany(mappedBy = "community")
+    private List<Post> posts;
+
+    public Community() {
+    }
+
+    public Community(String name, Long communityId, byte[] icon, String privacy, String description, List<User> user) {
+        this.name = name;
+        this.communityId = communityId;
+        this.icon = icon;
+        this.privacy = privacy;
+        this.description = description;
+        this.user = user;
+    }
+    
+    public void addUser(User users){
+        user.add(users);
+    }
 
     public String getName() {
         return name;
@@ -84,12 +109,20 @@ public class Community {
         this.description = description;
     }
 
-    public User getUser() {
+    public List<User> getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(List<User> user) {
         this.user = user;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
     }
 
 }

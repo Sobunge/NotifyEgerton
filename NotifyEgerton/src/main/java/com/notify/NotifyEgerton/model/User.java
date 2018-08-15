@@ -1,6 +1,7 @@
 package com.notify.NotifyEgerton.model;
 
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -57,8 +58,8 @@ public class User {
     @Size(min = 10, max = 50)
     private String email;
 
-    @OneToMany(mappedBy = "user")
-    private Collection<Community> community;
+    @ManyToMany(mappedBy = "user")
+    private List<Community> communities;
 
     public User() {
     }
@@ -75,9 +76,12 @@ public class User {
         this.universityBrunch = user.universityBrunch;
         this.category = user.category;
         this.email = user.email;
-        this.community = user.community;
     }
 
+    public void addCommunity(Community community) {
+        communities.add(community);
+    }
+    
     public String getFirstname() {
         return firstname;
     }
@@ -158,12 +162,12 @@ public class User {
         this.email = email;
     }
 
-    public Collection<Community> getCommunity() {
-        return community;
+    public List<Community> getCommunities() {
+        return communities;
     }
 
-    public void setCommunity(Collection<Community> community) {
-        this.community = community;
+    public void setCommunities(List<Community> communities) {
+        this.communities = communities;
     }
-
+    
 }

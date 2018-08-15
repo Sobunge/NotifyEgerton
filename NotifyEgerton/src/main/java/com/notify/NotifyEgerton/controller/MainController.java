@@ -1,5 +1,6 @@
 package com.notify.NotifyEgerton.controller;
 
+import com.notify.NotifyEgerton.model.Community;
 import java.security.Principal;
 
 import javax.validation.Valid;
@@ -14,10 +15,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.notify.NotifyEgerton.model.User;
+import com.notify.NotifyEgerton.service.CommunityService;
 import com.notify.NotifyEgerton.service.CustomeUserDetailsService;
+import java.util.ArrayList;
 
 @Controller
 public class MainController {
+    
+        @Autowired
+        CommunityService communityService;
+    
 
 	@RequestMapping("/")
 	public String index(Model model) {
@@ -31,6 +38,10 @@ public class MainController {
 	public String homepage(Model model, Principal principal) {
 		
 		model.addAttribute("title", "Uni-Notice");
+                
+                ArrayList<Community> communities = new ArrayList<>();
+                communities.addAll(communityService.getAllCommunities(principal.getName()));
+                model.addAttribute("communities", communities);
 		
 		if(principal.getName() == null){
 	

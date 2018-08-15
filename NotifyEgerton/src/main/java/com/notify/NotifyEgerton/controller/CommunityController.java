@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.notify.NotifyEgerton.model.Community;
+import com.notify.NotifyEgerton.model.Post;
 import com.notify.NotifyEgerton.model.User;
 ;
 import com.notify.NotifyEgerton.service.CommunityService;
 import com.notify.NotifyEgerton.service.CustomeUserDetailsService;
+import com.notify.NotifyEgerton.service.PostService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,14 +35,19 @@ public class CommunityController {
 
     @Autowired
     CustomeUserDetailsService customeUserDetailsService;
+    
+    @Autowired
+    PostService postService;
 
     @RequestMapping("community")
     public String community(Model model, Principal principal) {
 
         ArrayList<Community> communities = new ArrayList<>();
 
+        User user = customeUserDetailsService.activeUser(principal.getName());
         communities.addAll(communityService.getAllCommunities());
 
+        model.addAttribute("user", user);
         model.addAttribute("communities", communities);
         model.addAttribute("title", "Uni-Notice");
 
@@ -52,7 +59,7 @@ public class CommunityController {
         }
     }
 
-    @RequestMapping(value="createCommunity", method = RequestMethod.GET)
+    @RequestMapping(value = "createCommunity", method = RequestMethod.GET)
     public String createCommunity(Model model, Principal principal) {
 
         if (principal.getName() == null) {
@@ -61,12 +68,15 @@ public class CommunityController {
         } else {
 
             User user = customeUserDetailsService.activeUser(principal.getName());
-            
-            model.addAttribute("title", "Uni-Notice");
 
+            model.addAttribute("title", "Uni-Notice");
+            ArrayList<User> users = new ArrayList<>();
+
+            users.add(user);
             Community community = new Community();
-            community.setUser(user);
-            
+            community.setUser(users);
+
+            model.addAttribute("user", user);
             model.addAttribute("community", community);
 
             return "/createCommunity";
@@ -74,9 +84,14 @@ public class CommunityController {
     }
 
     @RequestMapping(value = "createCommunity", method = RequestMethod.POST)
-    public String processCommunityCreation(@Valid Community community, BindingResult bindingResult, Model model,Principal principal) {
+    public String processCommunityCreation(@Valid Community community, BindingResult bindingResult, Model model, Principal principal) {
         User user = customeUserDetailsService.activeUser(principal.getName());
-        community.setUser(user);
+
+        ArrayList<User> users = new ArrayList<>();
+
+        users.add(user);
+
+        community.setUser(users);
         if (bindingResult.hasErrors()) {
             return "createCommunity";
         }
@@ -85,9 +100,12 @@ public class CommunityController {
             return "createCommunity";
         }
 
+        
+        
         communityService.addCommunity(community);
         model.addAttribute("title", "Uni-Notice");
         model.addAttribute("success", "You have successfully created a community");
+        model.addAttribute("user", user);
         return "redirect:/community";
 
     }
@@ -104,19 +122,30 @@ public class CommunityController {
             User user = customeUserDetailsService.activeUser(principal.getName());
             model.addAttribute("community", community);
 
+            ArrayList<Post> posts = new ArrayList<>();
+            
+            posts = (ArrayList<Post>) postService.getAllPost(communityId);
+            
+            model.addAttribute("posts", posts);
             model.addAttribute("user", user);
             return "individualCommunity";
         }
 
     }
 
-    @PostMapping(value = "/Community/{communityId}/user/{username}")
-    public String addUserToCommunity(@RequestBody Community community, @PathVariable String username, @PathVariable Long communityId) {
+    @GetMapping(value = "/Community/{communityId}/join")
+    public String joinCommunity(Community community, @PathVariable Long communityId, Principal principal, Model model) {
 
+        User user = customeUserDetailsService.activeUser(principal.getName());
+        
         community = communityService.getCommunity(communityId).get();
 
+        community.addUser(user);
+        
         communityService.addCommunity(community);
+         
+        return "redirect:/community";
 
-        return "homepage";
     }
+
 }
