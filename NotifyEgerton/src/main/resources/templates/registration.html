@@ -1,146 +1,224 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
-<head th:replace="fragments :: head"></head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<body>
+        <title th:text="${title}">Uni-Notice</title>
 
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" type="text/css"
+              th:href="@{/style/Pretty-Footer.css}">
+        <link rel="stylesheet" th:href="@{/style/Google-Style-Login.css}" />
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+              crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" th:href="@{/style/style2.css}">
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-	<nav th:replace="fragments :: navigation"></nav>
+        <!-- Font Awesome JS -->
+        <script defer
+                src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+                integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+        <script defer
+                src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+                integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
 
-	<div class="login-card">
-		<section id="loginSection">
-			<h1 class="text-uppercase text-center">REGISTRATION</h1>
-		</section>
-		<img th:src="@{/images/avatar_2x.png}" class="profile-img-card">
-		<p class="profile-name-card"></p>
+    </head>
 
-		<form class="form-signin" th:action="@{/registration}"
-			th:object="${user}" method="post">
+    <body>
 
-			<span class="reauth-email"> </span>
-			<div class="alert alert-info" th:if="${exists}">
-				<p class="text text-center">
-					User with this username already exists
-				</p>
-			</div>
-			<fieldset>
-				<legend> Personal Information </legend>
-				<div class="form-group">
-					<label class="form-control-label"> First Name</label> <input
-						class="form-control" type="text" placeholder="First Name"
-						name="firstname" th:field="*{firstname}" id="firstname" autofocus />
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div>
-				</div>
-				<div class="form-group">
-					<label class="form-control-label"> Second Name </label> <input
-						class="form-control" type="text" placeholder="Second Name"
-						name="secondname" th:field="*{secondname}" id="secondname">
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('secondname')}"
-						th:errors="*{secondname}"></div>
-				</div>
-				<div>
-					<label class="form-control-label"> Third Name </label> <input
-						class="form-control" type="text" placeholder="Third Name"
-						name="thirdname" th:field="*{thirdname}" id="thirdname">
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('thirdname')}" th:errors="*{thirdname}"></div>
-				</div>
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav th:replace="fragments :: sidebar"></nav>
 
-				<div class="form-group">
-					<label class="form-control-label"> Username </label> <input
-						class="form-control" type="text" placeholder="Username"
-						name="username" th:field="*{username}" id="username">
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-				</div>
+            <!-- Page Content  -->
+            <div id="content">
 
-				<div class="form-group">
-					<label class="form-control-label"> Password </label> <input
-						class="form-control" type="password" placeholder="Password"
-						th:field="*{password}" id="password" name="password">
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"> Gender </label> <select
-						name="gender" class="form-control" th:field="*{gender}"
-						id="gender">
-						<option value="Select Gender ...">Select Gender ...</option>
-						<option value="Male">Male</option>
-						<option value="Female">Female</option>
-						<option value="Others">Others</option>
-					</select>
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
-				</div>
-
-				<div class="form-group">
-					<label class="form-control-label"> Email Address </label> <input
-						class="form-control" type="email" placeholder="Email address"
-						id="email" name="email" th:field="*{email}">
-					<div class="text text-danger" th:if="${#fields.hasErrors('email')}"
-						th:errors="*{email}"></div>
-				</div>
+                <nav th:replace="fragments :: mainbodyHeader"></nav>
+                <ol class="breadcrumb">
+                    <li><a class="active"> Home </a></li>
+                </ol>
+                <div class="alert alert-success" th:if="${success}">
+                    <p class="text text-center" th:text="${sucess}">Successful registration of a
+                        community</p>
+                </div>
+                <div id="mainbody">
 
 
-				<div class="form-group">
-					<label class="form-control-label"> Category </label> <select
-						name="category" class="form-control" th:field="*{category}"
-						id="category">
-						<option value="Select Category ...">Select Category ...</option>
-						<option value="Student">Student</option>
-						<option value="TeachingStaff">Teaching Staff</option>
-						<option value="NonTeachingStaff">Non-Teaching Staff</option>
-						<option value="Admin">Admin</option>
-					</select>
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
-				</div>
+                    <div class="login-card">
+                        <section id="loginSection">
+                            <h1 class="text-uppercase text-center">REGISTRATION</h1>
+                        </section>
+                        <img th:src="@{/images/avatar_2x.png}" class="profile-img-card">
+                        <p class="profile-name-card"></p>
 
-			</fieldset>
-			<br> <br>
+                        <form class="form-signin" th:action="@{/registration}"
+                              th:object="${user}" method="post">
 
-			<fieldset>
-				<legend> Institution Information </legend>
+                            <span class="reauth-email"> </span>
+                            <div class="alert alert-info" th:if="${exists}">
+                                <p class="text text-center">
+                                    User with this username already exists
+                                </p>
+                            </div>
+                            <fieldset>
+                                <legend> Personal Information </legend>
+                                <div class="form-group">
+                                    <label class="form-control-label"> First Name</label> <input
+                                        class="form-control" type="text" placeholder="First Name"
+                                        name="firstname" th:field="*{firstname}" id="firstname" autofocus />
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-control-label"> Second Name </label> <input
+                                        class="form-control" type="text" placeholder="Second Name"
+                                        name="secondname" th:field="*{secondname}" id="secondname">
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('secondname')}"
+                                         th:errors="*{secondname}"></div>
+                                </div>
+                                <div>
+                                    <label class="form-control-label"> Third Name </label> <input
+                                        class="form-control" type="text" placeholder="Third Name"
+                                        name="thirdname" th:field="*{thirdname}" id="thirdname">
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('thirdname')}" th:errors="*{thirdname}"></div>
+                                </div>
 
-				<div class="form-group">
-					<label class="form-control-label"> University </label> <input
-						class="form-control" type="text" placeholder=" University "
-						id="university" th:field="*{university}" name="university">
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('university')}"
-						th:errors="*{university}"></div>
-				</div>
+                                <div class="form-group">
+                                    <label class="form-control-label"> Username </label> <input
+                                        class="form-control" type="text" placeholder="Username"
+                                        name="username" th:field="*{username}" id="username">
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                                </div>
 
-				<div class="form-group">
-					<label class="form-control-label"> University Brunch </label> <input
-						class="form-control" type="text" placeholder="University Brunch"
-						id="universityBrunch" th:field="*{universityBrunch}"
-						name="universityBrunch">
-					<div class="text text-danger"
-						th:if="${#fields.hasErrors('universityBrunch')}"
-						th:errors="*{universityBrunch}"></div>
-				</div>
-			</fieldset>
+                                <div class="form-group">
+                                    <label class="form-control-label"> Password </label> <input
+                                        class="form-control" type="password" placeholder="Password"
+                                        th:field="*{password}" id="password" name="password">
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                                </div>
 
-			<button class="btn btn-primary btn-block btn-lg btn-signin"
-				type="submit">Register</button>
-		</form>
-		<a th:href="@{/login}" class="forgot-password"> Already
-			registered? Login</a>
-	</div>
+                                <div class="form-group">
+                                    <label class="form-control-label"> Gender </label> <select
+                                        name="gender" class="form-control" th:field="*{gender}"
+                                        id="gender">
+                                        <option value="Select Gender ...">Select Gender ...</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></div>
+                                </div>
 
-	<footer th:replace="fragments :: footer"></footer>
+                                <div class="form-group">
+                                    <label class="form-control-label"> Email Address </label> <input
+                                        class="form-control" type="email" placeholder="Email address"
+                                        id="email" name="email" th:field="*{email}">
+                                    <div class="text text-danger" th:if="${#fields.hasErrors('email')}"
+                                         th:errors="*{email}"></div>
+                                </div>
 
-	<script th:src="@{/javascript/jquery.min.js}"></script>
-	<script th:src="@{/javascript/bootstrap.min.js}"></script>
 
-</body>
+                                <div class="form-group">
+                                    <label class="form-control-label"> Category </label> <select
+                                        name="category" class="form-control" th:field="*{category}"
+                                        id="category">
+                                        <option value="Select Category ...">Select Category ...</option>
+                                        <option value="Student">Student</option>
+                                        <option value="TeachingStaff">Teaching Staff</option>
+                                        <option value="NonTeachingStaff">Non-Teaching Staff</option>
+                                    </select>
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></div>
+                                </div>
 
+                            </fieldset>
+                            <br> <br>
+
+                            <fieldset>
+                                <legend> Institution Information </legend>
+
+                                <div class="form-group">
+                                    <label class="form-control-label"> University </label> <input
+                                        class="form-control" type="text" placeholder=" University "
+                                        id="university" th:field="*{university}" name="university">
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('university')}"
+                                         th:errors="*{university}"></div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label"> University Brunch </label> <input
+                                        class="form-control" type="text" placeholder="University Brunch"
+                                        id="universityBrunch" th:field="*{universityBrunch}"
+                                        name="universityBrunch">
+                                    <div class="text text-danger"
+                                         th:if="${#fields.hasErrors('universityBrunch')}"
+                                         th:errors="*{universityBrunch}"></div>
+                                </div>
+                            </fieldset>
+
+                            <button class="btn btn-primary btn-block btn-lg btn-signin"
+                                    type="submit">Register</button>
+                        </form>
+                        <a th:href="@{/login}" class="forgot-password"> Already
+                            registered? Login</a>
+                    </div>
+
+
+                    <footer th:replace="fragments :: footer"></footer>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        <!-- Popper.JS -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+        <!-- jQuery Custom Scroller CDN -->
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar, #content').toggleClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+        </script>
+
+    </body>
 
 </html>
 

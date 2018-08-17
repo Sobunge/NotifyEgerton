@@ -1,228 +1,198 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:fragment="head">
-<title th:text="${title}">Uni-Notice</title>
+    <head th:fragment="head">
+        <title th:text="${title}">Uni-Notice</title>
 
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<link rel="stylesheet" th:href="@{/style/Google-Style-Login.css}" />
-<link rel="stylesheet" th:href="@{/style/styles.css}" />
+        <link rel="stylesheet" th:href="@{/style/Google-Style-Login.css}" />
+        <link rel="stylesheet" th:href="@{/style/styles.css}" />
 
-<link rel="stylesheet" th:href="@{/style/font-awesome.min.css}" />
-<link rel="stylesheet" th:href="@{/style/Pretty-Footer.css}" />
-<link rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
+        <link rel="stylesheet" th:href="@{/style/font-awesome.min.css}" />
+        <link rel="stylesheet" th:href="@{/style/Pretty-Footer.css}" />
+        <link rel="stylesheet" th:href="@{/style/bootstrap.min.css}" />
 
-</head>
-
-
-
-<body>
+    </head>
 
 
 
-	<nav class="navbar navbar-default navbar-fixed-top"
-		th:fragment="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand navbar-link" href="#" id="Name"><img
-					th:src="@{/images/8.jpg}" id="logo"><strong>
-						Uni-Notice </strong> </a>
-				<button class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#navcol-1">
-					<span class="sr-only">Toggle navigation</span><span
-						class="icon-bar"></span><span class="icon-bar"></span><span
-						class="icon-bar"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse" id="navcol-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li
-						th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"
-						role="presentation"><a href="/">Home </a></li>
-					<li role="presentation"><a href="/#footer">About Us</a></li>
-					<li role="presentation"><a href="/#footer">Contact Us</a></li>
-					<li
-						th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}"
-						role="presentation"><a th:href="@{/homepage}">Login </a></li>
-					<li
-						th:classappend="${#httpServletRequest.getRequestURI() == '/registration' ? 'active':''}"
-						role="presentation"><a href="registration">Register </a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<nav id="sidebar" th:fragment="sidebar">
-		<div class="sidebar-header">
-			<h2 th:text="${title}">Uni-Notice</h2>
-		</div>
-
-		<h5>
-			<a th:href="@{/profile}"> Welcome
-				[[${#httpServletRequest.remoteUser}]] </a>
-		</h5>
-
-		<ul class="list-unstyled components">
-			<h3>Menu</h3>
-			<li><a th:href="@{/homepage}">Home</a></li>
-			<li><a th:href="@{/profile}">Profile</a></li>
-			<li><a th:href="@{#footer}">About Us</a></li>
-
-			<li class="active"><a href="#homeSubmenu" data-toggle="collapse"
-				aria-expanded="false" class="dropdown-toggle"> Community </a>
-				<ul class="collapse list-unstyled" id="homeSubmenu">
-					<li><a th:href="@{/community}"> Administration </a></li>
-					<li><a href="#"> Accomodation </a></li>
-					<li><a href="#"> Security </a></li>
-				</ul></li>
-			<li><a href="#pageSubmenu" data-toggle="collapse"
-				aria-expanded="false" class="dropdown-toggle">Groups</a>
-				<ul class="collapse list-unstyled" id="pageSubmenu">
-					<li><a th:href="@{/group}"> Elite </a></li>
-					<li><a href="#"> Study Group </a></li>
-					<li><a href="#"> Bible Study </a></li>
-				</ul></li>
-			<li><a href="#">Contact Us</a></li>
-		</ul>
-	</nav>
-
-	<nav class="navbar navbar-expand-lg navbar-light bg-light"
-		th:fragment="mainbodyHeader">
-		<div class="container-fluid">
-
-			<button type="button" id="sidebarCollapse" class="btn btn-info">
-				<i class="fas fa-align-left"></i> <span>Menu</span>
-			</button>
-			<button class="btn btn-dark d-inline-block d-lg-none ml-auto"
-				type="button" data-toggle="collapse"
-				data-target="#navbarSupportedContent"
-				aria-controls="navbarSupportedContent" aria-expanded="false"
-				aria-label="Toggle navigation">
-				<i class="fas fa-align-justify"></i>
-			</button>
-
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="nav navbar-nav ml-auto">
-					<li class="nav-item active"><a class="nav-link" href="#">Home</a>
-					</li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/profile}">
-							Welcome [[${#httpServletRequest.remoteUser}]] </a></li>
-					<li class="nav-item">
-						<form th:action="@{/logout}" method="post">
-							<a class="nav-link" onclick="this.parentNode.submit();">
-								Logout </a>
-						</form>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<div id="buttonWrapper" th:fragment="mainButtons">
-		<a th:href="@{/createCommunity}" class="btn btn-success"> Create a
-			community </a> <a th:href="@{/community}" class="btn btn-success">
-			Join a community </a>
-	</div>
-
-	<div th:fragment="posts">
-
-		<div class="starter-template panel" th:each="post : ${pager.posts}">
-			<div class="panel-heading">
-				<h1>
-					<a th:text="${post.title}" th:href="@{'/post/' + ${post.id}}">Title</a>
-				</h1>
-				<div
-					th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')} + ' by '">
-					Created by</div>
-				<div>
-					<a th:text="${post.user.username}"
-						th:href="@{'/blog/' + ${post.user.username}}">User</a>
-				</div>
-			</div>
-			<h3 class="panel-body" th:text="${post.body}">Body</h3>
-			<br></br>
-		</div>
-
-	</div>
-
-	<div th:fragment="pagination">
-
-		<!-- Pagination -->
-		<div class="pagination" th:with="baseUrl=${URLparameter}">
-			<span th:if="${pager.indexOutOfBounds()}"> Page is out of
-				bounds. Go back to <a class="pageLink"
-				th:href="@{${baseUrl}(page=1)}">Home</a>.
-			</span> <span th:unless="${pager.indexOutOfBounds()}"> <span
-				th:if="${pager.hasPrevious()}"> <a class="pageLink"
-					th:href="@{${baseUrl}(page=1)}">&laquo; first</a> <a
-					class="pageLink"
-					th:href="@{${baseUrl}(page=${pager.getPageIndex() - 1})}">
-						previous</a>
-			</span> <span th:if="${pager.getTotalPages() != 1}"
-				th:text="'Page ' + ${pager.getPageIndex()} + ' of ' + ${pager.getTotalPages()} + '.'">
-			</span> <span th:if="${pager.hasNext()}"> <a class="pageLink"
-					th:href="@{${baseUrl}(page=${pager.getPageIndex() + 1})}">next</a>
-					<a class="pageLink"
-					th:href="@{${baseUrl}(page=${pager.getTotalPages()})}">last
-						&raquo;</a>
-			</span>
-			</span>
-		</div>
-
-	</div>
+    <body>
 
 
 
-	<footer th:fragment="footer">
-		<div id="footer">
-			<div class="row">
-				<div class="col-md-4 col-sm-6 footer-navigation">
-					<h3>
-						<a href="#">Company<span>logo </span></a>
-					</h3>
-					<p class="links">
-						<a href="#">Home</a><strong> · </strong><a href="#">Blog</a><strong>
-							· </strong><a href="#">Pricing</a><strong> · </strong><a href="#">About</a><strong>
-							· </strong><a href="#">Faq</a><strong> · </strong><a href="#">Contact</a>
-					</p>
-					<p class="company-name">Company Name © 2015</p>
-				</div>
-				<div class="col-md-4 col-sm-6 footer-contacts">
-					<div>
-						<span class="fa fa-map-marker footer-contacts-icon"> </span>
-						<p>
-							<span class="new-line-span">21 Revolution Street</span> Paris,
-							France
-						</p>
-					</div>
-					<div>
-						<i class="fa fa-phone footer-contacts-icon"></i>
-						<p class="footer-center-info email text-left">+1 555 123456</p>
-					</div>
-					<div>
-						<i class="fa fa-envelope footer-contacts-icon"></i>
-						<p>
-							<a href="#" target="_blank">support@company.com</a>
-						</p>
-					</div>
-				</div>
-				<div class="clearfix visible-sm-block"></div>
-				<div class="col-md-4 footer-about">
-					<h4>About the company</h4>
-					<p>Lorem ipsum dolor sit amet, consectateur adispicing elit.
-						Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
-					</p>
-					<div class="social-links social-icons">
-						<a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-							class="fa fa-twitter"></i></a><a href="#"><i
-							class="fa fa-linkedin"></i></a><a href="#"><i
-							class="fa fa-github"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-</body>
+        <nav class="navbar navbar-default navbar-fixed-top"
+             th:fragment="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand navbar-link" href="#" id="Name"><img
+                            th:src="@{/images/8.jpg}" id="logo"><strong>
+                            Uni-Notice </strong> </a>
+                    <button class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#navcol-1">
+                        <span class="sr-only">Toggle navigation</span><span
+                            class="icon-bar"></span><span class="icon-bar"></span><span
+                            class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="navcol-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li
+                            th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"
+                            role="presentation"><a href="/">Home </a></li>
+                        <li role="presentation"><a href="/#footer">About Us</a></li>
+                        <li role="presentation"><a href="/#footer">Contact Us</a></li>
+                        <li
+                            th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}"
+                            role="presentation"><a th:href="@{/homepage}">Login </a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <nav id="sidebar" th:fragment="sidebar">
+            <div class="sidebar-header">
+                <h2 th:text="${title}">Uni-Notice</h2>
+            </div>
+
+            <h5>
+                <a th:href="@{/profile}"> Welcome
+                    [[${#httpServletRequest.remoteUser}]] </a>
+            </h5>
+
+            <ul class="list-unstyled components">
+                <h3>Menu</h3>
+                <li><a th:href="@{/homepage}">Home</a></li>
+                <li><a th:href="@{/profile}">Profile</a></li>
+                <li> <a th:href="@{/users}"> Users </a> </li>
+
+                <li class="active"><a href="#homeSubmenu" data-toggle="collapse"
+                                      aria-expanded="false" class="dropdown-toggle"> Community </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li><a th:href="@{/community}"> Administration </a></li>
+                        <li><a href="#"> Accomodation </a></li>
+                        <li><a href="#"> Security </a></li>
+                    </ul></li>
+                <li><a href="#pageSubmenu" data-toggle="collapse"
+                       aria-expanded="false" class="dropdown-toggle">Groups</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a th:href="@{/group}"> Elite </a></li>
+                        <li><a href="#"> Study Group </a></li>
+                        <li><a href="#"> Bible Study </a></li>
+                    </ul></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"
+             th:fragment="mainbodyHeader">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i> <span>Menu</span>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto"
+                        type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item active"><a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/profile}">
+                                Welcome [[${#httpServletRequest.remoteUser}]] </a></li>
+                        <li class="nav-item">
+                            <form th:action="@{/logout}" method="post">
+                                <a class="nav-link" onclick="this.parentNode.submit();">
+                                    Logout </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="buttonWrapper" th:fragment="mainButtons">
+            <a th:href="@{/createCommunity}" class="btn btn-success"> Create a
+                community </a> <a th:href="@{/community}" class="btn btn-success">
+                Join a community </a>
+        </div>
+
+        <div th:fragment="posts">
+
+            <div class="starter-template panel" th:each="post : ${pager.posts}">
+                <div class="panel-heading">
+                    <h1>
+                        <a th:text="${post.title}" th:href="@{'/post/' + ${post.id}}">Title</a>
+                    </h1>
+                    <div
+                        th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')} + ' by '">
+                        Created by</div>
+                    <div>
+                        <a th:text="${post.user.username}"
+                           th:href="@{'/blog/' + ${post.user.username}}">User</a>
+                    </div>
+                </div>
+                <h3 class="panel-body" th:text="${post.body}">Body</h3>
+                <br></br>
+            </div>
+
+        </div>
+
+        <footer th:fragment="footer">
+            <div id="footer">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 footer-navigation">
+                        <h3>
+                            <a href="#">Company<span>logo </span></a>
+                        </h3>
+                        <p class="links">
+                            <a href="#">Home</a><strong> · </strong><a href="#">Blog</a><strong>
+                                · </strong><a href="#">Pricing</a><strong> · </strong><a href="#">About</a><strong>
+                                · </strong><a href="#">Faq</a><strong> · </strong><a href="#">Contact</a>
+                        </p>
+                        <p class="company-name">Company Name © 2015</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6 footer-contacts">
+                        <div>
+                            <span class="fa fa-map-marker footer-contacts-icon"> </span>
+                            <p>
+                                <span class="new-line-span">21 Revolution Street</span> Paris,
+                                France
+                            </p>
+                        </div>
+                        <div>
+                            <i class="fa fa-phone footer-contacts-icon"></i>
+                            <p class="footer-center-info email text-left">+1 555 123456</p>
+                        </div>
+                        <div>
+                            <i class="fa fa-envelope footer-contacts-icon"></i>
+                            <p>
+                                <a href="#" target="_blank">support@company.com</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-sm-block"></div>
+                    <div class="col-md-4 footer-about">
+                        <h4>About the company</h4>
+                        <p>Lorem ipsum dolor sit amet, consectateur adispicing elit.
+                            Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                        </p>
+                        <div class="social-links social-icons">
+                            <a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
+                                    class="fa fa-twitter"></i></a><a href="#"><i
+                                    class="fa fa-linkedin"></i></a><a href="#"><i
+                                    class="fa fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>

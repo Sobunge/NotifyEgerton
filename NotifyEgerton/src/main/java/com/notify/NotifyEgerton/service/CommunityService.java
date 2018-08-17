@@ -17,9 +17,7 @@ public class CommunityService{
 
 	@Autowired
 	CommunityRepository communityRepository;
-        
-        @Autowired
-        CustomeUserDetailsService customeUserDetailsService;
+
 	
        public List<Community> getAllCommunities(String username){
     

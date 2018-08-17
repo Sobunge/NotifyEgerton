@@ -1,5 +1,6 @@
 package com.notify.NotifyEgerton.config;
 
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -11,21 +12,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
-import com.notify.NotifyEgerton.service.CustomeUserDetailsService;
-
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @EnableWebSecurity
-@ComponentScan(basePackageClasses = CustomeUserDetailsService.class)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-
+    
     @Autowired
-    private UserDetailsService userDetailsService;
+    private DataSource dataSource;
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-         auth.userDetailsService(userDetailsService).passwordEncoder(passwordencoder());
+         auth.jdbcAuthentication().dataSource(dataSource)
+                 .usersByUsernameQuery("select username as principal, password as credentials, true from user where username = ?")
+                 .authoritiesByUsernameQuery("select username as pricipal, role as role from user_roles where username = ? ")
+                 .passwordEncoder(passwordencoder()).rolePrefix("ROLE_");
     }
     
     
@@ -34,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index","/registration","/style/**","/javascript/**","/images/**","/fonts/**").permitAll()
+                .antMatchers("/", "/index","/registration","/style/**","/javascript/**","/images/**","/fonts/**","/webjars/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .formLogin().loginPage("/login")

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title th:text="${title}">Uni-Notice</title>
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" type="text/css"
+              th:href="@{/style/Pretty-Footer.css}">
+        <link rel="stylesheet"
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+              integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+              crossorigin="anonymous">
+        <!-- Our Custom CSS -->
+        <link rel="stylesheet" th:href="@{/style/style2.css}">
+        <!-- Scrollbar Custom CSS -->
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+
+        <!-- Font Awesome JS -->
+        <script defer
+                src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+                integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+        <script defer
+                src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+                integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav th:replace="fragments :: sidebar"></nav>
+
+            <!-- Page Content  -->
+            <div id="content">
+
+                <nav th:replace="fragments :: mainbodyHeader"></nav>
+                <ol class="breadcrumb">
+                    <li><a class="active"> Home </a></li>
+                </ol>
+                <div class="alert alert-success" th:if="${success}">
+                    <p class="text text-center" th:text="${sucess}">Successful registration of a
+                        community</p>
+                </div>
+                <div id="mainbody">
+
+
+                    <form action="/users" class="form-inline">
+                        <div class="form-group mb-2">
+                            <input type="text" class="form-control" name="username" placeholder="Search User">
+                            <input type="submit" value="search" class="btn btn-primary">
+                        </div>
+                    </form>
+
+                    <a th:href="@{/registration}" class="btn btn-success" style="margin-bottom:10px;"> Add User </a>
+
+                    <div class="card">
+                        <div class="card card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th> First Name </th>
+                                        <th> Second Name </th>
+                                        <th> Third Name </th>
+                                        <th> Username </th>
+                                        <th> Gender </th>
+                                        <th> Category </th>
+                                        <th> Email </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="user:${users}">
+                                        <td th:text="${user.firstname}"></td>
+                                        <td th:text="${user.secondname}"></td>
+                                        <td th:text="${user.thirdname}"></td>
+                                        <td th:text="${user.username}"></td>
+                                        <td th:text="${user.gender}"></td>
+                                        <td th:text="${user.category}"></td>
+                                        <td th:text="${user.email}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <footer th:replace="fragments :: footer"></footer>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery CDN - Slim version (=without AJAX) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        <!-- Popper.JS -->
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+            integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+        <!-- Bootstrap JS -->
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+            integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+        <!-- jQuery Custom Scroller CDN -->
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#sidebar").mCustomScrollbar({
+                    theme: "minimal"
+                });
+
+                $('#sidebarCollapse').on('click', function () {
+                    $('#sidebar, #content').toggleClass('active');
+                    $('.collapse.in').toggleClass('in');
+                    $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+                });
+            });
+        </script>
+
+    </body>
+
+</html>

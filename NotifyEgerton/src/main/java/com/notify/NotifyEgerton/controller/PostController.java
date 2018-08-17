@@ -4,8 +4,8 @@ import com.notify.NotifyEgerton.model.Community;
 import com.notify.NotifyEgerton.model.Post;
 import com.notify.NotifyEgerton.model.User;
 import com.notify.NotifyEgerton.service.CommunityService;
-import com.notify.NotifyEgerton.service.CustomeUserDetailsService;
 import com.notify.NotifyEgerton.service.PostService;
+import com.notify.NotifyEgerton.service.UserService;
 import java.security.Principal;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class PostController {
     PostService postService;
     
     @Autowired
-    CustomeUserDetailsService customeUserDetailsService;
+    UserService customeUserDetailsService;
     
     @Autowired
     CommunityService communityService;

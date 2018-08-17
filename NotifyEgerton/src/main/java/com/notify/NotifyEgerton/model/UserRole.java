@@ -1,51 +1,46 @@
 package com.notify.NotifyEgerton.model;
 
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class UserRole {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_role_id")
-    private long userRoleId;
+    private String name;
     
-    @Column(name = "username")
-    @NotNull
-    @Size(min = 8, max = 20)
-    private String username;
-    
-    @Column(name = "role")
-    @NotNull
-    @Size(min = 4, max = 5)
-    private String role;
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
-    public long getUserRoleId() {
-        return userRoleId;
+    public UserRole(String name, List<User> users) {
+        this.name = name;
+        this.users = users;
     }
 
-    public void setUserRoleId(long userRoleId) {
-        this.userRoleId = userRoleId;
+    public UserRole(String name) {
+        this.name = name;
     }
 
-    public String getUsername() {
-        return username;
+    public UserRole() {
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getName() {
+        return name;
     }
 
-    public String getRole() {
-        return role;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public List<User> getUsers() {
+        return users;
     }
-    
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
     
     
     

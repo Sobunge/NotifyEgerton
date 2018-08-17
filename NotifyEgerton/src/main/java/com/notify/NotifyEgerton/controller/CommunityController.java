@@ -20,8 +20,8 @@ import com.notify.NotifyEgerton.model.Post;
 import com.notify.NotifyEgerton.model.User;
 ;
 import com.notify.NotifyEgerton.service.CommunityService;
-import com.notify.NotifyEgerton.service.CustomeUserDetailsService;
 import com.notify.NotifyEgerton.service.PostService;
+import com.notify.NotifyEgerton.service.UserService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,7 +34,7 @@ public class CommunityController {
     CommunityService communityService;
 
     @Autowired
-    CustomeUserDetailsService customeUserDetailsService;
+    UserService userService;
     
     @Autowired
     PostService postService;
@@ -44,7 +44,7 @@ public class CommunityController {
 
         ArrayList<Community> communities = new ArrayList<>();
 
-        User user = customeUserDetailsService.activeUser(principal.getName());
+        User user = userService.findOne(principal.getName());
         communities.addAll(communityService.getAllCommunities());
 
         model.addAttribute("user", user);
@@ -67,7 +67,7 @@ public class CommunityController {
             return "redirect:/login?logout";
         } else {
 
-            User user = customeUserDetailsService.activeUser(principal.getName());
+            User user = userService.findOne(principal.getName());
 
             model.addAttribute("title", "Uni-Notice");
             ArrayList<User> users = new ArrayList<>();
@@ -85,7 +85,7 @@ public class CommunityController {
 
     @RequestMapping(value = "createCommunity", method = RequestMethod.POST)
     public String processCommunityCreation(@Valid Community community, BindingResult bindingResult, Model model, Principal principal) {
-        User user = customeUserDetailsService.activeUser(principal.getName());
+        User user = userService.findOne(principal.getName());
 
         ArrayList<User> users = new ArrayList<>();
 
@@ -119,7 +119,7 @@ public class CommunityController {
 
             Community community = communityService.getCommunity(communityId).get();
 
-            User user = customeUserDetailsService.activeUser(principal.getName());
+            User user = userService.findOne(principal.getName());
             model.addAttribute("community", community);
 
             ArrayList<Post> posts = new ArrayList<>();
@@ -136,7 +136,7 @@ public class CommunityController {
     @GetMapping(value = "/Community/{communityId}/join")
     public String joinCommunity(Community community, @PathVariable Long communityId, Principal principal, Model model) {
 
-        User user = customeUserDetailsService.activeUser(principal.getName());
+        User user = userService.findOne(principal.getName());
         
         community = communityService.getCommunity(communityId).get();
 

@@ -15,105 +15,61 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.notify.NotifyEgerton.model.User;
+import com.notify.NotifyEgerton.model.UserRole;
 import com.notify.NotifyEgerton.service.CommunityService;
-import com.notify.NotifyEgerton.service.CustomeUserDetailsService;
+import com.notify.NotifyEgerton.service.UserService;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller
 public class MainController {
-    
-        @Autowired
-        CommunityService communityService;
-    
 
-	@RequestMapping("/")
-	public String index(Model model) {
+    @Autowired
+    CommunityService communityService;
 
-		model.addAttribute("title", "Uni-Notice");
+    @RequestMapping("/")
+    public String index(Model model) {
 
-		return "/index";
-	}
+        model.addAttribute("title", "Uni-Notice");
 
-	@RequestMapping("/homepage")
-	public String homepage(Model model, Principal principal) {
-		
-		model.addAttribute("title", "Uni-Notice");
-                
-                ArrayList<Community> communities = new ArrayList<>();
-                communities.addAll(communityService.getAllCommunities(principal.getName()));
-                model.addAttribute("communities", communities);
-		
-		if(principal.getName() == null){
-	
-			return "redirect:/login?logout";
-		}
-		else
-		{
-			return "/homepage";
-		}
-		
-	}
-	
-	@Autowired
-    private CustomeUserDetailsService customeUserDetailsService;
-	
-	 @RequestMapping("/profile")
-		public String profile(Model model, Principal principal) {
-			
-			if(principal.getName() == null) {
-				return "redirect:/login?logout";
-			}
-			else{
-				User user = customeUserDetailsService.activeUser(principal.getName());
-				
-				model.addAttribute("user", user);
-				
-				return "/profile";
-			}
-		}
-	 
-	    @GetMapping("/registration")
-	    public String registration(Model model){
-	        
-	    	model.addAttribute("title", "Registration");
-	        model.addAttribute("user", new User());
-	        return "registration";
-	    }
-	    
-	    @PostMapping("/registration")
-	    public String registrationProcessing(@Valid User user, BindingResult bindingResult, Model model){
-	        
-	        if(bindingResult.hasErrors())
-	        {
-	            return "registration";
-	        }
-	        if(customeUserDetailsService.isUserPresent(user.getUsername()))
-	        {
-	            model.addAttribute("exists", "The username already exists");
-	            return "registration";
-	        }
-	        
-	        BCryptPasswordEncoder bCryptPasswordEncoder = new  BCryptPasswordEncoder();
-	        
-	        
-	        User user1 = new User();
-	        user1.setFirstname(user.getFirstname());
-	        user1.setSecondname(user.getSecondname());
-	        user1.setThirdname(user.getThirdname());
-	        user1.setUsername(user.getUsername());
-	        user1.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-	        user1.setGender(user.getGender());
-	        user1.setUniversity(user.getUniversity());
-	        user1.setUniversityBrunch(user.getUniversityBrunch());
-	        user1.setCategory(user.getCategory());
-	        user1.setEmail(user.getEmail());
-	        
-	        
-	        customeUserDetailsService.addUser(user1);
-	        
-	        model.addAttribute("success", "You have successfull registered");
-	        
-	        return "/login";
-	    }
-	
+        return "/index";
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    @RequestMapping("/homepage")
+    public String homepage(Model model, Principal principal) {
+
+        model.addAttribute("title", "Uni-Notice");
+
+        ArrayList<Community> communities = new ArrayList<>();
+        communities.addAll(communityService.getAllCommunities(principal.getName()));
+        model.addAttribute("communities", communities);
+
+        if (principal.getName() == null) {
+
+            return "redirect:/login?logout";
+        } else {
+            return "/homepage";
+        }
+
+    }
+
+    @PreAuthorize("hasAnyRole('USER')")
+    @RequestMapping("/userHomepage")
+    public String userHomepage(Model model, Principal principal) {
+
+        ArrayList<Community> communities = new ArrayList<>();
+        communities.addAll(communityService.getAllCommunities(principal.getName()));
+        model.addAttribute("communities", communities);
+
+        if (principal.getName() == null) {
+
+            return "redirect:/login?logout";
+        } else {
+            return "/userHomepage";
+        }
+    }
+
 }

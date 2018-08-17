@@ -60,7 +60,14 @@ public class User {
 
     @ManyToMany(mappedBy = "user")
     private List<Community> communities;
-
+    
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles" , joinColumns = {
+        @JoinColumn(name = "username", referencedColumnName = "username")}, inverseJoinColumns = {
+        @JoinColumn(name = "role", referencedColumnName = "name")
+        })
+    private List<UserRole> roles;
+    
     public User() {
     }
 
@@ -81,7 +88,7 @@ public class User {
     public void addCommunity(Community community) {
         communities.add(community);
     }
-    
+
     public String getFirstname() {
         return firstname;
     }
@@ -168,6 +175,14 @@ public class User {
 
     public void setCommunities(List<Community> communities) {
         this.communities = communities;
+    }
+
+    public List<UserRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
     }
     
 }
