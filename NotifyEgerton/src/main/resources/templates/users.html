@@ -44,7 +44,8 @@
 
                 <nav th:replace="fragments :: mainbodyHeader"></nav>
                 <ol class="breadcrumb">
-                    <li><a class="active"> Home </a></li>
+                    <li><a th:href="@{/homepage}" class="btn-link"> Home </a></li>
+                    <li><a class="active"> Users </a></li>
                 </ol>
                 <div class="alert alert-success" th:if="${success}">
                     <p class="text text-center" th:text="${sucess}">Successful registration of a

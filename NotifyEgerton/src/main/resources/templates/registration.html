@@ -45,9 +45,13 @@
             <div id="content">
 
                 <nav th:replace="fragments :: mainbodyHeader"></nav>
+                
                 <ol class="breadcrumb">
-                    <li><a class="active"> Home </a></li>
+                    <li><a th:href="@{/homepage}" class="btn-link"> Home </a></li>
+                    <li><a th:href="@{/users}" class="btn-link"> Users </a></li>
+                    <li><a class="active"> Add Users </a></li>
                 </ol>
+                
                 <div class="alert alert-success" th:if="${success}">
                     <p class="text text-center" th:text="${sucess}">Successful registration of a
                         community</p>
@@ -139,6 +143,7 @@
                                         name="category" class="form-control" th:field="*{category}"
                                         id="category">
                                         <option value="Select Category ...">Select Category ...</option>
+                                        <option value="Admin"> Admin </option>
                                         <option value="Student">Student</option>
                                         <option value="TeachingStaff">Teaching Staff</option>
                                         <option value="NonTeachingStaff">Non-Teaching Staff</option>

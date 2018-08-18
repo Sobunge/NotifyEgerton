@@ -84,35 +84,27 @@
                             group </a>
                     </div>
                     <section class="cardWrapper">
-                        <div class="card" style="width: 18rem;" id="card">
-                            <img th:src="@{/images/2.jpg}" alt="Card One" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Elite</h5>
-                                <p class="card-text">It is a long established fact that a
-                                    reader will be distracted by the readable ...</p>
-                                <a href="#" class="btn btn-primary">Read...</a>
+                        <div class="cardContainer" th:each="group : ${groups}">
+                            <div class="card" style="width: 18rem;">
+                                <img th:src="@{/images/2.jpg}" alt="Card One"
+                                     class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="card-title" th:text="${group.name}">Accomodation</h5>
+                                    <p class="card-text text-center"
+                                       th:text="${group.description}">It is a long established
+                                        fact that a reader will be distracted by the readable content
+                                        of a page when looking at its layout.</p>
+                                    <div class="accept">
+                                        <a th:href="@{/Group/{groupId}(groupId=${group.groupId})}" class="btn btn-primary">Read More</a>
+                                        <div th:if="${groups.size()>0}">
+                                            <h6 class="btn btn-dark"> <span class="badge badge-light" th:text="${groups.size()}"> 4 </span> Posts </h6>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div class="card" style="width: 18rem;" id="card">
-                            <img th:src="@{/images/2.jpg}" alt="Card One" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Study Group</h5>
-                                <p class="card-text">It is a long established fact that a
-                                    reader will be distracted by the readable ...</p>
-                                <a href="#" class="btn btn-primary">Read...</a>
-                            </div>
-                        </div>
-
-                        <div class="card" style="width: 18rem;" id="card">
-                            <img th:src="@{/images/2.jpg}" alt="Card One" class="card-img-top">
-                            <div class="card-body">
-                                <h5 class="card-title">Bible study</h5>
-                                <p class="card-text">It is a long established fact that a
-                                    reader will be distracted by the readable ...</p>
-                                <a href="#" class="btn btn-primary">Read...</a>
-                            </div>
-                        </div>
 
                     </section>
 

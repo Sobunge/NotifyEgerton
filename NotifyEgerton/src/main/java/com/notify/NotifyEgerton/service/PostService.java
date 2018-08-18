@@ -32,6 +32,16 @@ public class PostService {
         return post;
     }
     
+    public List<Post> getAllGroupPost(long groupId){
+    
+    
+        List<Post> post = new ArrayList<>();
+        
+        postRepository.findByGroupGroupId(groupId).forEach(post :: add);
+        
+        return post;
+    }
+    
     public void addPost(Post post){
         
         postRepository.save(post);

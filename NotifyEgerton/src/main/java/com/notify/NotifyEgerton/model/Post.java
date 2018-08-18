@@ -32,8 +32,10 @@ public class Post {
     private Date createDate;
 
     @ManyToOne
-    @NotNull
     private Community community;
+    
+    @ManyToOne
+    private Groups group;
     
     public Long getId() {
         return id;
@@ -75,6 +77,13 @@ public class Post {
         this.community = community;
     }
 
+    public Groups getGroup() {
+        return group;
+    }
+
+    public void setGroup(Groups group) {
+        this.group = group;
+    }
     
     
 }

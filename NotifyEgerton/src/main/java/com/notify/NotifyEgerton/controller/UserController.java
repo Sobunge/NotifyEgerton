@@ -62,7 +62,7 @@ public class UserController {
             return "registration";
         }
 
-        userService.addUser(user);
+        userService.addAdmin(user);
 
         model.addAttribute("success", "You have successfull registered");
 

@@ -61,6 +61,9 @@ public class User {
     @ManyToMany(mappedBy = "user")
     private List<Community> communities;
     
+    @ManyToMany(mappedBy = "users")
+    private List<Groups> groups;
+    
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles" , joinColumns = {
         @JoinColumn(name = "username", referencedColumnName = "username")}, inverseJoinColumns = {
@@ -184,5 +187,15 @@ public class User {
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
     }
+
+    public List<Groups> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Groups> groups) {
+        this.groups = groups;
+    }
+    
+    
     
 }

@@ -111,7 +111,7 @@ public class CommunityController {
     }
 
     @RequestMapping("Community/{communityId}")
-    public String individualCommunity(Model model, @PathVariable long communityId, Principal principal, @RequestParam(defaultValue = "0") int page) {
+    public String individualCommunity(Model model, @PathVariable long communityId, Principal principal) {
 
         if (principal.getName() == null) {
             return "redirect:/login?logout";

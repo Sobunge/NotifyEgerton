@@ -70,17 +70,13 @@
 
                 <li class="active"><a href="#homeSubmenu" data-toggle="collapse"
                                       aria-expanded="false" class="dropdown-toggle"> Community </a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li><a th:href="@{/community}"> Administration </a></li>
-                        <li><a href="#"> Accomodation </a></li>
-                        <li><a href="#"> Security </a></li>
+                    <ul class="collapse list-unstyled" id="homeSubmenu" th:each="community : ${communities}">
+                        <li> <a th:text="${community.name}"> Community Name </a> </li>
                     </ul></li>
                 <li><a href="#pageSubmenu" data-toggle="collapse"
                        aria-expanded="false" class="dropdown-toggle">Groups</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li><a th:href="@{/group}"> Elite </a></li>
-                        <li><a href="#"> Study Group </a></li>
-                        <li><a href="#"> Bible Study </a></li>
+                    <ul class="collapse list-unstyled" id="pageSubmenu" th:each="group : ${groups}">
+                        <li> <a th:href="@{/Group/{groupId}(groupId=${group.groupId})}" th:text="${group.name}"> Group name </a> </li>
                     </ul></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
