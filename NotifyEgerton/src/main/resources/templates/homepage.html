@@ -56,6 +56,13 @@
                     <div th:replace="fragments :: mainButtons"></div>
 
                     <section class="cardWrapper">
+
+                        <div th:unless="${communities} and ${communities.size()}">
+                            <br>
+                            <p class="text text-center alert alert-warning">No Communities have
+                                been registred</p>
+                        </div>
+
                         <div class="cardContainer" th:each="community : ${communities}">
                             <div class="card" style="width: 18rem;">
                                 <img th:src="@{/images/2.jpg}" alt="Card One"
@@ -84,6 +91,12 @@
                             group </a>
                     </div>
                     <section class="cardWrapper">
+
+                        <div th:unless="${groups} and ${groups.size()}">
+                            <p class="text text-center alert alert-warning">No Groups have
+                                been registred</p>
+                        </div>
+
                         <div class="cardContainer" th:each="group : ${groups}">
                             <div class="card" style="width: 18rem;">
                                 <img th:src="@{/images/2.jpg}" alt="Card One"
@@ -102,10 +115,7 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
-
                     </section>
 
                     <footer th:replace="fragments :: footer"></footer>

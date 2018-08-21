@@ -34,10 +34,10 @@ public class MainController {
 
     @Autowired
     GroupService groupService;
-    
+
     @Autowired
     PostService postService;
-    
+
     @RequestMapping("/")
     public String index(Model model) {
 
@@ -54,11 +54,10 @@ public class MainController {
 
         ArrayList<Community> communities = new ArrayList<>();
         ArrayList<Groups> groups = new ArrayList<>();
-        
+
         groups.addAll(groupService.getAllGroups(principal.getName()));
         communities.addAll(communityService.getAllCommunities(principal.getName()));
-        
-      
+
         model.addAttribute("groups", groups);
         model.addAttribute("communities", communities);
 
@@ -76,8 +75,14 @@ public class MainController {
     public String userHomepage(Model model, Principal principal) {
 
         ArrayList<Community> communities = new ArrayList<>();
+
         communities.addAll(communityService.getAllCommunities(principal.getName()));
         model.addAttribute("communities", communities);
+
+        ArrayList<Groups> groups = new ArrayList<>();
+
+        groups.addAll(groupService.getAllGroups(principal.getName()));
+        model.addAttribute("groups", groups);
 
         if (principal.getName() == null) {
 

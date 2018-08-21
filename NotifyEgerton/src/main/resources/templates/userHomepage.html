@@ -56,6 +56,13 @@
                     <div th:replace="fragments :: mainButtons"></div>
 
                     <section class="cardWrapper">
+
+                        <div th:unless="${communities} and ${communities.size()}">
+                            <br>
+                            <p class="text text-center alert alert-warning">No Communities have
+                                been registred</p>
+                        </div>
+
                         <div class="cardContainer" th:each="community : ${communities}">
                             <div class="card" style="width: 18rem;">
                                 <img th:src="@{/images/2.jpg}" alt="Card One"
@@ -82,22 +89,30 @@
                             group </a>
                     </div>
                     <section class="cardWrapper">
-                        <div class="cardContainer" th:each="community : ${communities}">
+
+                        <div th:unless="${groups} and ${groups.size()}">
+                            <p class="text text-center alert alert-warning">No Groups have
+                                been registred</p>
+                        </div>
+
+                        <div class="cardContainer" th:each="group : ${groups}">
                             <div class="card" style="width: 18rem;">
                                 <img th:src="@{/images/2.jpg}" alt="Card One"
                                      class="card-img-top">
                                 <div class="card-body">
-                                    <h5 class="card-title" th:text="${community.name}">Accomodation</h5>
+                                    <h5 class="card-title" th:text="${group.name}">Accomodation</h5>
                                     <p class="card-text text-center"
-                                       th:text="${community.description}">It is a long established
+                                       th:text="${group.description}">It is a long established
                                         fact that a reader will be distracted by the readable content
                                         of a page when looking at its layout.</p>
                                     <div class="accept">
-                                        <a th:href="@{/Community/{communityId}(communityId=${community.communityId})}" class="btn btn-primary">Read More</a>
+                                        <a th:href="@{/Group/{groupId}(groupId=${group.groupId})}" class="btn btn-primary">Read More</a>
+                                        <div>
+                                            <h6 class="btn btn-dark"> <span class="badge badge-light"> 4 </span> Posts </h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </section>
 
