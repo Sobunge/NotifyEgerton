@@ -149,7 +149,7 @@ public class GroupController {
 
         groupService.addGroup(group);
 
-        return "redirect:/community";
+        return "redirect:/group";
 
     }
 

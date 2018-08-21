@@ -51,7 +51,8 @@
                        <h3 class="alert alert-success" th:if="${message}" th:text="${message}"> Success message </h3>
                        
                     <div th:unless="${communities} and ${communities.size()}">
-                        <p class="text text-center text-danger">No Communities have
+                        <br>
+                        <p class="text text-center alert alert-danger">No Communities have
                             been registred</p>
                     </div>
 
