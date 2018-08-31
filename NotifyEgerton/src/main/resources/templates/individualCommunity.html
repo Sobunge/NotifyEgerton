@@ -29,7 +29,7 @@
 
     </head>
 
-    <body>
+    <body style="background-color:#e6e6e6;">
 
         <div class="wrapper">
             <!-- Sidebar  -->
@@ -39,9 +39,18 @@
             <div id="content">
 
                 <nav th:replace="fragments :: mainbodyHeader"></nav>
+                
                 <ol class="breadcrumb">
-                    <li><a class="active"> Home </a></li>
+                    <li sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/homepage}" class="btn-link"> Home </a>
+                    </li>
+                    <li sec:authorize="hasRole('USER')">
+                        <a th:href="@{/userHomepage}" class="btn-link"> Home </a>
+                    </li>
+                    <li><a th:href="@{/community}" class="btn-link"> Communities </a></li>
+                    <li><a class="active" th:text="${community.name}"> Community Name </a></li>
                 </ol>
+                
                 <div class="alert alert-success" th:if="${success}">
                     <p class="text text-center" th:text="${sucess}">Successfully
                         Added a post</p>
@@ -56,27 +65,30 @@
 
                     </div>
 
-                    <div th:if="${community.getUser().contains(user)}">
-                        <br> <a class="btn btn-primary" th:href="@{/Community/{communityId}/createPost(communityId=${communityId})}"> Create Post </a>
+                    <div sec:authorize="hasRole('ADMIN')">
+                        <div th:if="${community.getUser().contains(user)}">
+                            <br> <a class="btn btn-primary" th:href="@{/Community/{communityId}/createPost(communityId=${communityId})}"> Create Post </a>
+                        </div>
                     </div>
+
 
                     <br>
                     <div  th:each="post : ${posts}" style="padding: 20px;">
-                    <div class="card text-center">
-                        <div class="card-header font-weight-bold " th:text="${post.title}">
-                            post header
+                        <div class="card text-center">
+                            <div class="card-header font-weight-bold " th:text="${post.title}">
+                                post header
 
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text" th:text="${post.body}">With supporting text below as a natural lead-in to additional content.</p>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text" th:text="${post.body}">With supporting text below as a natural lead-in to additional content.</p>
 
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-muted" th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')}"> 
-                                2 days ago
+                            </div>
+                            <div class="card-footer">
+                                <div class="text-muted" th:text="'Created: ' + ${#dates.format(post.createDate, 'dd-MMM-yyyy')}"> 
+                                    2 days ago
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
 
                     <footer th:replace="fragments :: footer"></footer>

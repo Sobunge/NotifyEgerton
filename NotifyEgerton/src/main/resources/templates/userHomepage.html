@@ -30,7 +30,7 @@
                 src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
                 integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
-
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     </head>
 
     <body>
@@ -52,8 +52,8 @@
                 </div>
                 <div id="mainbody">
                     <h2>Communities</h2>
-
-                    <div th:replace="fragments :: mainButtons"></div>
+                    
+                    <div th:replace="fragments :: mainButton"></div>
 
                     <section class="cardWrapper">
 
@@ -75,6 +75,9 @@
                                         of a page when looking at its layout.</p>
                                     <div class="accept">
                                         <a th:href="@{/Community/{communityId}(communityId=${community.communityId})}" class="btn btn-primary">Read More</a>
+                                        <div>
+                                            <a id="communityBadge" data-value="@{/community/{communityId}/all(communityId=${community.communityId})}" th:href="@{/community/{communityId}/all(communityId=${community.communityId})}"  class="btn btn-dark"> <span class=" cBadge badge badge-light">  </span> Posts </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +111,7 @@
                                     <div class="accept">
                                         <a th:href="@{/Group/{groupId}(groupId=${group.groupId})}" class="btn btn-primary">Read More</a>
                                         <div>
-                                            <a th:href="@{/group/{groupId}/all(groupId=${group.groupId})}"  class="btn btn-dark"> <span class="badge badge-light"> 4 </span> Posts </a>
+                                            <a id="groupBadge" data-value="@{/group/{groupId}/all(groupId=${group.groupId})}" th:href="@{/group/{groupId}/all(groupId=${group.groupId})}"  class="btn btn-dark"> <span class=" gBadge badge badge-light">  </span> Posts </a>
                                         </div>
                                     </div>
                                 </div>
@@ -121,10 +124,8 @@
             </div>
         </div>
 
-        <!-- jQuery CDN - Slim version (=without AJAX) -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+
+
         <!-- Popper.JS -->
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
@@ -150,6 +151,31 @@
                     $('.collapse.in').toggleClass('in');
                     $('a[aria-expanded=true]').attr('aria-expanded', 'false');
                 });
+            });
+
+            $(function () {
+
+                var $notice1 = $('.cBadge');
+                var $notice2 = $('.gBadge');
+      
+                
+                $.ajax({
+                    type: 'GET',
+                    url: $('#groupBadge').attr('href'),
+                    success: function (notice) {
+                        $notice2.append(notice);
+                    }
+                }); 
+     
+                
+                $.ajax({
+                    type: 'GET',
+                    url: $('#communityBadge').attr('href'),
+                    success: function (notice) {
+                        $notice1.append(notice);
+                    }
+                });
+                
             });
         </script>
 

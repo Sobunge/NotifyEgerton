@@ -54,7 +54,7 @@
 
         <nav id="sidebar" th:fragment="sidebar">
             <div class="sidebar-header">
-                <h2 th:text="${title}">Uni-Notice</h2>
+                <h2>Uni-Notice</h2>
             </div>
 
             <h5>
@@ -64,9 +64,22 @@
 
             <ul class="list-unstyled components">
                 <h3>Menu</h3>
-                <li><a th:href="@{/homepage}">Home</a></li>
+                
+                <!-- Users homepage -->
+                <div sec:authorize="hasRole('ADMIN')">
+                    <li><a th:href="@{/homepage}">Home</a></li>
+                </div>
+                
+                <!-- Admins Homepage -->
+                <div sec:authorize="hasRole('USER')">
+                    <li><a th:href="@{/userHomepage}">Home</a></li>
+                </div>
+
                 <li><a th:href="@{/profile}">Profile</a></li>
-                <li> <a th:href="@{/users}"> Users </a> </li>
+
+                <div sec:authorize="hasRole('ADMIN')">
+                    <li> <a th:href="@{/users}"> Users </a> </li>
+                </div>
 
                 <li class="active"><a href="#homeSubmenu" data-toggle="collapse"
                                       aria-expanded="false" class="dropdown-toggle"> Community </a>
@@ -119,6 +132,12 @@
                 community </a> <a th:href="@{/community}" class="btn btn-success">
                 Join a community </a>
         </div>
+
+        <div id="buttonWrapper" th:fragment="mainButton" class="text text-center">
+            <a th:href="@{/community}" class="btn btn-success">
+                Join a community </a>
+        </div>
+
 
         <div th:fragment="posts">
 

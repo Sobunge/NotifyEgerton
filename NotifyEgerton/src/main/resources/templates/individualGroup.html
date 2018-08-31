@@ -29,7 +29,7 @@
 
     </head>
 
-    <body>
+    <body style="background-color:#e6e6e6;">
 
         <div class="wrapper">
             <!-- Sidebar  -->
@@ -40,7 +40,14 @@
 
                 <nav th:replace="fragments :: mainbodyHeader"></nav>
                 <ol class="breadcrumb">
-                    <li><a class="active"> Home </a></li>
+                    <li sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/homepage}" class="btn-link"> Home </a>
+                    </li>
+                    <li sec:authorize="hasRole('USER')">
+                        <a th:href="@{/userHomepage}" class="btn-link"> Home </a>
+                    </li>
+                    <li><a th:href="@{/group}" class="btn-link"> Groups </a></li>
+                    <li><a class="active" th:text="${group.name}"> Group Name </a></li>
                 </ol>
                 <div class="alert alert-success" th:if="${success}">
                     <p class="text text-center" th:text="${sucess}">Successfully

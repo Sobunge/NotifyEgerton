@@ -5,7 +5,6 @@ import com.notify.NotifyEgerton.service.PostService;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,4 +24,14 @@ public class NotificationController {
 
         return posts.size();
     }
+    
+    
+     @RequestMapping("community/{communityId}/all")
+    public int getAllCommunityNot(@PathVariable Long communityId) {
+
+        posts = postService.getAllPost(communityId);
+
+        return posts.size();
+    }
+    
 }

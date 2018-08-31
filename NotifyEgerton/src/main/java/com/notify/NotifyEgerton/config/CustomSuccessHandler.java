@@ -46,9 +46,7 @@ public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
             url = "/homepage";
         } else if (isUser(roles)) {
             url = "/userHomepage";
-        } else {
-            url="/accessDenied";
-        }
+        } 
  
         return url;
     }

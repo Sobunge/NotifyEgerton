@@ -32,7 +32,12 @@
 
                 <nav th:replace="fragments :: mainbodyHeader"></nav>
                 <ol class="breadcrumb">
-                    <li> <a th:href="@{/homepage}" class="btn-link"> Home </a> </li>
+                    <li sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/homepage}" class="btn-link"> Home </a> 
+                    </li>
+                    <li sec:authorize="hasRole('USER')">
+                        <a th:href="@{/userHomepage}" class="btn-link"> Home </a> 
+                    </li>
                     <li> <a class="active"> Profile </a> </li>
                 </ol>
 

@@ -27,7 +27,7 @@
 
     </head>
 
-    <body>
+    <body style="background-color:#e6e6e6;">
         <div class="wrapper">
             <!-- Sidebar  -->
             <nav th:replace="fragments :: sidebar"></nav>
@@ -37,19 +37,27 @@
 
                 <nav th:replace="fragments :: mainbodyHeader"></nav>
                 <ol class="breadcrumb">
-                    <li><a th:href="@{/homepage}" class="btn-link"> Home </a></li>
-                    <li><a class="active"> Community </a></li>
+                    <li sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/homepage}" class="btn-link"> Home </a>
+                    </li>
+                    <li sec:authorize="hasRole('USER')">
+                        <a th:href="@{/userHomepage}" class="btn-link"> Home </a>
+                    </li>
+                    <li><a class="active"> Communities </a></li>
                 </ol>
 
                 <div id="mainbody">
 
                     <h2>Communities</h2>
 
-                    <a th:href="@{/createCommunity}" class="btn btn-success"
-                       id="createButton"> Create a community </a>
+                    <div sec:authorize="hasRole('ADMIN')">
+                        <a th:href="@{/createCommunity}" class="btn btn-success"
+                           id="createButton"> Create a community </a>
+                    </div>
 
-                       <h3 class="alert alert-success" th:if="${message}" th:text="${message}"> Success message </h3>
-                       
+
+                    <h3 class="alert alert-success" th:if="${message}" th:text="${message}"> Success message </h3>
+
                     <div th:unless="${communities} and ${communities.size()}">
                         <br>
                         <p class="text text-center alert alert-danger">No Communities have
@@ -75,17 +83,17 @@
                                         of a page when looking at its layout.</p>
                                     <div class="accept">
                                         <a th:href="@{/Community/{communityId}(communityId=${community.communityId})}" class="btn btn-primary">Read More</a>
-                                        
+
                                         <!-- If user is in the community -->
                                         <div th:if="${community.getUser().contains(user)}">
                                             <a class="btn btn-primary"> Member </a>
                                         </div>
-                                        
+
                                         <!-- Else -->
                                         <div th:unless="${community.getUser().contains(user)}">
                                             <a th:href="@{/Community/{communityId}/join(communityId=${community.communityId})}" class="btn btn-primary"> Join </a>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
