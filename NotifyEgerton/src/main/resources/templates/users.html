@@ -86,6 +86,7 @@
                                         <td th:text="${user.gender}"></td>
                                         <td th:text="${user.category}"></td>
                                         <td th:text="${user.email}"></td>
+                                        <td> <a  class="btn btn-danger" th:href="@{/delete/{username}(username = ${user.username})}"> Delete </a> </td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -101,6 +101,7 @@
                                      th:errors="*{description}"></div>
                             </div>
                             <input type="hidden" th:field="*{user}"/>
+                            <input type="hidden" th:field="*{count}" value=0 />
                             
                             <button class="btn btn-primary btn-block btn-lg btn-signin"
                                     type="submit">Create</button>

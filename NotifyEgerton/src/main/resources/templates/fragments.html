@@ -64,12 +64,12 @@
 
             <ul class="list-unstyled components">
                 <h3>Menu</h3>
-                
+
                 <!-- Users homepage -->
                 <div sec:authorize="hasRole('ADMIN')">
                     <li><a th:href="@{/homepage}">Home</a></li>
                 </div>
-                
+
                 <!-- Admins Homepage -->
                 <div sec:authorize="hasRole('USER')">
                     <li><a th:href="@{/userHomepage}">Home</a></li>
@@ -130,7 +130,7 @@
         <div id="buttonWrapper" th:fragment="mainButtons">
             <a th:href="@{/createCommunity}" class="btn btn-success"> Create a
                 community </a> <a th:href="@{/community}" class="btn btn-success">
-                Join a community </a>
+                View all communities </a>
         </div>
 
         <div id="buttonWrapper" th:fragment="mainButton" class="text text-center">

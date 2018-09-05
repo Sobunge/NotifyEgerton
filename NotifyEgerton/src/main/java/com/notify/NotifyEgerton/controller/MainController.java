@@ -58,6 +58,7 @@ public class MainController {
         groups.addAll(groupService.getAllGroups(principal.getName()));
         communities.addAll(communityService.getAllCommunities(principal.getName()));
 
+        
         model.addAttribute("groups", groups);
         model.addAttribute("communities", communities);
 

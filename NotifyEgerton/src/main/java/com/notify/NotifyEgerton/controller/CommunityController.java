@@ -11,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.notify.NotifyEgerton.model.Community;
 import com.notify.NotifyEgerton.model.Post;
@@ -22,7 +20,7 @@ import com.notify.NotifyEgerton.model.User;
 import com.notify.NotifyEgerton.service.CommunityService;
 import com.notify.NotifyEgerton.service.PostService;
 import com.notify.NotifyEgerton.service.UserService;
-import org.springframework.web.bind.annotation.RequestBody;
+import java.util.List;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
@@ -35,9 +33,11 @@ public class CommunityController {
 
     @Autowired
     UserService userService;
-    
+
     @Autowired
     PostService postService;
+
+    List<Post> posts = new ArrayList<>();
 
     @RequestMapping("community")
     public String community(Model model, Principal principal) {
@@ -100,8 +100,6 @@ public class CommunityController {
             return "createCommunity";
         }
 
-        
-        
         communityService.addCommunity(community);
         model.addAttribute("title", "Uni-Notice");
         model.addAttribute("success", "You have successfully created a community");
@@ -120,12 +118,12 @@ public class CommunityController {
             Community community = communityService.getCommunity(communityId).get();
 
             User user = userService.findOne(principal.getName());
+
             model.addAttribute("community", community);
 
-            ArrayList<Post> posts = new ArrayList<>();
-            
-            posts = (ArrayList<Post>) postService.getAllPost(communityId);
-            
+            List<Post> posts = new ArrayList<>();
+            posts = postService.getAllPost(communityId);
+
             model.addAttribute("posts", posts);
             model.addAttribute("user", user);
             return "individualCommunity";
@@ -137,13 +135,13 @@ public class CommunityController {
     public String joinCommunity(Community community, @PathVariable Long communityId, Principal principal, Model model) {
 
         User user = userService.findOne(principal.getName());
-        
+
         community = communityService.getCommunity(communityId).get();
 
         community.addUser(user);
-        
+
         communityService.addCommunity(community);
-         
+
         return "redirect:/community";
 
     }

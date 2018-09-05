@@ -41,6 +41,9 @@ public class Community {
     @Column(name = "description")
     private String description;
 
+    @NotNull
+    @Column
+    private int count;
    
     @ManyToMany
     private List<User> user;
@@ -119,5 +122,15 @@ public class Community {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+    
+    
 
 }

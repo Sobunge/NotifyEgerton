@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.notify.NotifyEgerton.model.Community;
 import com.notify.NotifyEgerton.model.User;
 import com.notify.NotifyEgerton.repository.CommunityRepository;
+import com.notify.NotifyEgerton.repository.PostRepository;
 import sun.security.krb5.internal.ktab.KeyTabConstants;
 
 
@@ -17,6 +18,9 @@ public class CommunityService{
 
 	@Autowired
 	CommunityRepository communityRepository;
+        
+        @Autowired
+        PostRepository postRepository;
 
 	
        public List<Community> getAllCommunities(String username){

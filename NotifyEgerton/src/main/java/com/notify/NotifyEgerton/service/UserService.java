@@ -6,7 +6,6 @@ import com.notify.NotifyEgerton.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +31,11 @@ public class UserService {
         
         userRepository.save(user);
         
+    }
+    
+    public void deleteUser(User user){
+    
+     userRepository.delete(user);
     }
     
     public void addAdmin(User user) {
