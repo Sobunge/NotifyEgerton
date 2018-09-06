@@ -33,9 +33,9 @@ public class UserService {
         
     }
     
-    public void deleteUser(User user){
+    public void deleteUser(String username){
     
-     userRepository.delete(user);
+     userRepository.deleteById(username);
     }
     
     public void addAdmin(User user) {

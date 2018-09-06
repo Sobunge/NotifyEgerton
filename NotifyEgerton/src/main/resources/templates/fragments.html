@@ -41,8 +41,9 @@
                         <li
                             th:classappend="${#httpServletRequest.getRequestURI() == '/' ? 'active':''}"
                             role="presentation"><a href="/">Home </a></li>
-                        <li role="presentation"><a href="/#footer">About Us</a></li>
                         <li role="presentation"><a href="/#footer">Contact Us</a></li>
+                        <li role="presentation"><a href="/Help">Help</a></li>
+
                         <li
                             th:classappend="${#httpServletRequest.getRequestURI() == '/login' ? 'active':''}"
                             role="presentation"><a th:href="@{/homepage}">Login </a></li>

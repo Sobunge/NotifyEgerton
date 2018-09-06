@@ -76,7 +76,7 @@
                                     <div class="accept">
                                         <a th:href="@{/Community/{communityId}(communityId=${community.communityId})}" class="btn btn-primary">Read More</a>
                                         <div>
-                                            <a id="communityBadge" data-value="@{/community/{communityId}/all(communityId=${community.communityId})}" th:href="@{/community/{communityId}/all(communityId=${community.communityId})}"  class="btn btn-dark"> <span class=" cBadge badge badge-light">  </span> Posts </a>
+                                            <a id="communityBadge" class="btn btn-dark" style="color: white;"> <span class=" cBadge badge badge-light" th:text="${community.count}">  </span> Posts </a>
                                         </div>
                                     </div>
                                 </div>
@@ -111,7 +111,7 @@
                                     <div class="accept">
                                         <a th:href="@{/Group/{groupId}(groupId=${group.groupId})}" class="btn btn-primary">Read More</a>
                                         <div>
-                                            <a id="groupBadge" data-value="@{/group/{groupId}/all(groupId=${group.groupId})}" th:href="@{/group/{groupId}/all(groupId=${group.groupId})}"  class="btn btn-dark"> <span class=" gBadge badge badge-light">  </span> Posts </a>
+                                            <a id="groupBadge" class="btn btn-dark" style="color: white;"> <span class=" gBadge badge badge-light" th:text="${group.count}">  </span> Posts </a>
                                         </div>
                                     </div>
                                 </div>
@@ -153,30 +153,6 @@
                 });
             });
 
-            $(function () {
-
-                var $notice1 = $('.cBadge');
-                var $notice2 = $('.gBadge');
-      
-                
-                $.ajax({
-                    type: 'GET',
-                    url: $('#groupBadge').attr('href'),
-                    success: function (notice) {
-                        $notice2.append(notice);
-                    }
-                }); 
-     
-                
-                $.ajax({
-                    type: 'GET',
-                    url: $('#communityBadge').attr('href'),
-                    success: function (notice) {
-                        $notice1.append(notice);
-                    }
-                });
-                
-            });
         </script>
 
     </body>

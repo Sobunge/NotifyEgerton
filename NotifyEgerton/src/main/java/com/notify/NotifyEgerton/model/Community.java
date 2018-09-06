@@ -42,7 +42,6 @@ public class Community {
     private String description;
 
     @NotNull
-    @Column
     private int count;
    
     @ManyToMany

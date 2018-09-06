@@ -61,6 +61,29 @@ public class UserController {
             return "/profile";
         }
     }
+    
+    @PostMapping("/changingPassword")
+    public String changingPassword(Model model, Principal principal,@RequestParam String password,
+            @RequestParam String newPassword, @RequestParam String repeatNewPassword){
+        
+        if(newPassword.compareTo(repeatNewPassword) != 0){
+        
+            String errorMessage = "The password entered does not match";
+            
+            model.addAttribute("errorMessage", errorMessage);
+            
+            return "/profile";
+        }
+        
+         User user = userService.findOne(principal.getName());
+         user.setPassword(newPassword);
+         
+         userService.addUser(user);
+         
+         String message = "The password was changed successfully";
+        
+        return "/profile";
+    }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/registration")
@@ -104,9 +127,46 @@ public class UserController {
     @RequestMapping("/delete/{username}")
     public void deleteUser(@PathVariable String username){
     
-        User user = userService.findOne(username);
-        
-        userService.deleteUser(user);
+       
+        userService.deleteUser(username);
     }
 
+    @GetMapping("restPassword")
+    public String resetPassword(){
+    
+        return "/restPassword";
+        
+    }
+    
+    @PostMapping("restPassword")
+    public String processResetPassword(@RequestParam String username, 
+            @RequestParam String password, @RequestParam String confirmPassword,
+            Model model){
+    
+        String uname = username;
+        String pword = password;
+        String cpword = confirmPassword;
+        
+        
+        if(pword.compareTo(cpword) != 0){
+        
+            String errorMessage = "The password entered does not match ";
+            model.addAttribute("errorMessage", errorMessage);
+            
+            return "/restPassword";
+            
+        }
+        
+        else{
+            
+            User user = userService.findOne(username);
+            user.setPassword(password);
+            userService.addUser(user);
+
+            String message = "The password has been changed";
+            
+            model.addAttribute("message", message);
+            return "/login";
+        }
+    }
 }

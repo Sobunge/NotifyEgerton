@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,7 +70,9 @@ public class PostController {
         }
 
         Community community = communityService.getCommunity(communityId).get();
-
+        community.setCount(postService.getAllPost(communityId).size()+1);
+        
+        communityService.addCommunity(community);
         post.setCommunity(community);
 
         User user = new User();
@@ -84,9 +87,14 @@ public class PostController {
         for (int i = 0; i <= users.size()-1; i++) {
 
             if((users.get(i).getEmail().compareTo(user.getEmail())) <0)
+                try{
             emailService.sendSimpleMessage(users.get(i).getEmail(), "New Community Post",
                     "A post has been added to the " + community.getName() + " Community");
-
+                }
+            catch(MailException e){
+            
+                e.printStackTrace();
+            }
         }
 
         model.addAttribute("title", "Uni-Notice");
@@ -102,6 +110,10 @@ public class PostController {
 
         Post post = new Post();
 
+        groups.setCount(postService.getAllGroupPost(groupId).size()+1);
+        
+        groupService.addGroup(groups);
+        
         post.setGroup(groups);
         model.addAttribute("post", post);
         model.addAttribute("group", groups);
@@ -139,9 +151,14 @@ public class PostController {
         for (int i = 0; i <= users.size()-1; i++) {
 
             if((users.get(i).getEmail().compareTo(user.getEmail())) <0)
+                try{
             emailService.sendSimpleMessage(users.get(i).getEmail(), "New Group Post",
                     "A post has been added to the " + group.getName() + " Group");
-
+                }
+            catch(MailException e){
+            
+                e.printStackTrace();
+            }
         }
         
         model.addAttribute("title", "Uni-Notice");

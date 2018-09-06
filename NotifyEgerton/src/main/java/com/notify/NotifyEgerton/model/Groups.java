@@ -45,6 +45,9 @@ public class Groups {
     
     @OneToMany(mappedBy = "group")
     private List<Post> posts;
+    
+    @NotNull
+    private int count;
 
     public Groups() {
 
@@ -116,6 +119,15 @@ public class Groups {
     public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+    
     
     
 
