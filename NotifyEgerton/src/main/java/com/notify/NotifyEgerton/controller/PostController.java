@@ -21,7 +21,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class PostController {
@@ -84,6 +83,7 @@ public class PostController {
 
         postService.addPost(post);
 
+        /* 
         for (int i = 0; i <= users.size()-1; i++) {
 
             if((users.get(i).getEmail().compareTo(user.getEmail())) <0)
@@ -95,7 +95,7 @@ public class PostController {
             
                 e.printStackTrace();
             }
-        }
+        } */
 
         model.addAttribute("title", "Uni-Notice");
         model.addAttribute("success", "You have successfully posted a notice");
@@ -148,6 +148,7 @@ public class PostController {
 
         postService.addPost(post);
         
+        /* 
         for (int i = 0; i <= users.size()-1; i++) {
 
             if((users.get(i).getEmail().compareTo(user.getEmail())) <0)
@@ -159,7 +160,7 @@ public class PostController {
             
                 e.printStackTrace();
             }
-        }
+        } */
         
         model.addAttribute("title", "Uni-Notice");
         model.addAttribute("success", "You have successfully posted a notice");

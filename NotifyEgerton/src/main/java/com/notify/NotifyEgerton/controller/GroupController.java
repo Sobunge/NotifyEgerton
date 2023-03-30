@@ -20,7 +20,6 @@ import com.notify.NotifyEgerton.service.GroupService;
 import com.notify.NotifyEgerton.service.PostService;
 import com.notify.NotifyEgerton.service.UserService;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class GroupController {

@@ -4,26 +4,15 @@ import com.notify.NotifyEgerton.model.Community;
 import com.notify.NotifyEgerton.model.Groups;
 import java.security.Principal;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.notify.NotifyEgerton.model.User;
-import com.notify.NotifyEgerton.model.UserRole;
 import com.notify.NotifyEgerton.service.CommunityService;
 import com.notify.NotifyEgerton.service.GroupService;
 import com.notify.NotifyEgerton.service.PostService;
-import com.notify.NotifyEgerton.service.UserService;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 @Controller

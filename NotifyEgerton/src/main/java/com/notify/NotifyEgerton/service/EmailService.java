@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailService {
 
+    /*
+
     @Autowired
     private JavaMailSender emailSender;
 
@@ -26,5 +28,6 @@ public class EmailService {
         emailSender.send(message);
 
     }
+     */
 
 }

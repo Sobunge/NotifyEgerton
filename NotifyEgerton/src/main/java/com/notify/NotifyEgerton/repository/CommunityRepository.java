@@ -3,7 +3,6 @@ package com.notify.NotifyEgerton.repository;
 import org.springframework.data.repository.CrudRepository;
 
 import com.notify.NotifyEgerton.model.Community;
-import com.notify.NotifyEgerton.model.User;
 import java.util.List;
 
 

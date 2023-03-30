@@ -9,14 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name = "groups")
 public class Groups {
 
     @NotNull
-    @Size(min = 4, max = 20)
     @Column(name = "name")
     private String name;
 
@@ -31,12 +32,10 @@ public class Groups {
     private byte[] icon;
 
     @NotNull
-    @Size(min = 6, max = 8)
     @Column(name = "privacy")
     private String privacy;
 
     @NotNull
-    @Size(min = 8, max = 200)
     @Column(name = "description")
     private String description;
 

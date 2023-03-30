@@ -38,7 +38,7 @@ public class UserController {
 
         for (int i = 0; i < users.size(); i++) {
 
-            if ( user.getUsername() != (users.get(i).getUsername()) ) {
+            if (user.getUsername() != (users.get(i).getUsername())) {
                 allUsers.add(users.get(i));
             }
         }
@@ -61,27 +61,28 @@ public class UserController {
             return "/profile";
         }
     }
-    
+
     @PostMapping("/changingPassword")
-    public String changingPassword(Model model, Principal principal,@RequestParam String password,
-            @RequestParam String newPassword, @RequestParam String repeatNewPassword){
-        
-        if(newPassword.compareTo(repeatNewPassword) != 0){
-        
-            String errorMessage = "The password entered does not match";
-            
-            model.addAttribute("errorMessage", errorMessage);
-            
-            return "/profile";
+    public String changingPassword(Model model, Principal principal, @RequestParam String password,
+            @RequestParam String newPassword, @RequestParam String repeatNewPassword) {
+
+        String message = "";
+
+        if (newPassword.compareTo(repeatNewPassword) != 0) {
+
+            message = "The password entered does not match";
+
         }
-        
-         User user = userService.findOne(principal.getName());
-         user.setPassword(newPassword);
-         
-         userService.addUser(user);
-         
-         String message = "The password was changed successfully";
-        
+
+        User user = userService.findOne(principal.getName());
+        user.setPassword(newPassword);
+
+        userService.addUser(user);
+
+        message = "The password was changed successfully";
+
+        model.addAttribute("errorMessage", message);
+
         return "/profile";
     }
 
@@ -107,64 +108,63 @@ public class UserController {
             return "registration";
         }
 
-        //Sending a notification
+        /* 
+        // Sending a notification
         try {
             emailService.sendSimpleMessage(user.getEmail(), "Uni-Notice User Registration",
                     "You have successfull been added as a member of Uni-Notice. "
-                    + "Your username is: " + user.getUsername()
-                    + " and password is: " + user.getPassword() + ". Please change your password after login.");
+                            + "Your username is: " + user.getUsername()
+                            + " and password is: " + user.getPassword() + ". Please change your password after login.");
         } catch (MailException e) {
-            //Catch the error
+            // Catch the error
             e.printStackTrace();
         }
+        */
         userService.addUser(user);
 
         model.addAttribute("success", "You have successfull registered");
 
         return "/homepage";
     }
-    
+
     @RequestMapping("/delete/{username}")
-    public void deleteUser(@PathVariable String username){
-    
-       
+    public void deleteUser(@PathVariable String username) {
+
         userService.deleteUser(username);
     }
 
     @GetMapping("restPassword")
-    public String resetPassword(){
-    
+    public String resetPassword() {
+
         return "/restPassword";
-        
+
     }
-    
+
     @PostMapping("restPassword")
-    public String processResetPassword(@RequestParam String username, 
+    public String processResetPassword(@RequestParam String username,
             @RequestParam String password, @RequestParam String confirmPassword,
-            Model model){
-    
-        String uname = username;
+            Model model) {
+                
         String pword = password;
         String cpword = confirmPassword;
-        
-        
-        if(pword.compareTo(cpword) != 0){
-        
+
+        if (pword.compareTo(cpword) != 0) {
+
             String errorMessage = "The password entered does not match ";
             model.addAttribute("errorMessage", errorMessage);
-            
+
             return "/restPassword";
-            
+
         }
-        
-        else{
-            
+
+        else {
+
             User user = userService.findOne(username);
             user.setPassword(password);
             userService.addUser(user);
 
             String message = "The password has been changed";
-            
+
             model.addAttribute("message", message);
             return "/login";
         }

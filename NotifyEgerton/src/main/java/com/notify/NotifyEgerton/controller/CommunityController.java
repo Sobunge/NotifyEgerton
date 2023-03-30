@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.notify.NotifyEgerton.model.Community;
 import com.notify.NotifyEgerton.model.Post;
 import com.notify.NotifyEgerton.model.User;
-;
 import com.notify.NotifyEgerton.service.CommunityService;
 import com.notify.NotifyEgerton.service.PostService;
 import com.notify.NotifyEgerton.service.UserService;

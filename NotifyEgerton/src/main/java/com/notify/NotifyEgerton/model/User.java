@@ -1,6 +1,5 @@
 package com.notify.NotifyEgerton.model;
 
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;

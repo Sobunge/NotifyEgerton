@@ -1,17 +1,11 @@
 package com.notify.NotifyEgerton.service;
 
-
 import java.util.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.notify.NotifyEgerton.model.Community;
-import com.notify.NotifyEgerton.model.User;
 import com.notify.NotifyEgerton.repository.CommunityRepository;
 import com.notify.NotifyEgerton.repository.PostRepository;
-import sun.security.krb5.internal.ktab.KeyTabConstants;
-
 
 @Service
 public class CommunityService{
