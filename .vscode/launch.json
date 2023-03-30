@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-NotifyEgertonApplication<NotifyEgerton>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.notify.NotifyEgerton.NotifyEgertonApplication",
+            "projectName": "NotifyEgerton",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
