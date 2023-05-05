@@ -1,14 +1,12 @@
 package com.notify.NotifyEgerton.controller;
 
 import com.notify.NotifyEgerton.model.User;
-import com.notify.NotifyEgerton.service.EmailService;
 import com.notify.NotifyEgerton.service.UserService;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.MailException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +22,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @Autowired
-    private EmailService emailService;
 
     @GetMapping("/users")
     public String listUsers(Model model, Principal principal, @RequestParam(defaultValue = "") String username) {

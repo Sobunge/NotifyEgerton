@@ -3,7 +3,12 @@ package com.notify.NotifyEgerton.model;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import lombok.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class User {
 
@@ -69,132 +74,5 @@ public class User {
         @JoinColumn(name = "role", referencedColumnName = "name")
         })
     private List<UserRole> roles;
-    
-    public User() {
-    }
-
-    public User(User user) {
-
-        this.firstname = user.firstname;
-        this.secondname = user.secondname;
-        this.thirdname = user.thirdname;
-        this.username = user.username;
-        this.password = user.password;
-        this.gender = user.gender;
-        this.university = user.university;
-        this.universityBrunch = user.universityBrunch;
-        this.category = user.category;
-        this.email = user.email;
-    }
-
-    public void addCommunity(Community community) {
-        communities.add(community);
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getSecondname() {
-        return secondname;
-    }
-
-    public void setSecondname(String secondname) {
-        this.secondname = secondname;
-    }
-
-    public String getThirdname() {
-        return thirdname;
-    }
-
-    public void setThirdname(String thirdname) {
-        this.thirdname = thirdname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getUniversityBrunch() {
-        return universityBrunch;
-    }
-
-    public void setUniversityBrunch(String universityBrunch) {
-        this.universityBrunch = universityBrunch;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Community> getCommunities() {
-        return communities;
-    }
-
-    public void setCommunities(List<Community> communities) {
-        this.communities = communities;
-    }
-
-    public List<UserRole> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<UserRole> roles) {
-        this.roles = roles;
-    }
-
-    public List<Groups> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(List<Groups> groups) {
-        this.groups = groups;
-    }
-    
-    
     
 }
