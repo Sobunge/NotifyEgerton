@@ -1,17 +1,9 @@
 package com.notify.NotifyEgerton.model;
 
-
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+
 import lombok.*;
 
 @Data
@@ -48,14 +40,18 @@ public class Community {
 
     @NotNull
     private int count;
-   
-    @ManyToMany
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "community_users", joinColumns = {
+            @JoinColumn(name = "community_id", referencedColumnName = "community_id") }, inverseJoinColumns = {
+                    @JoinColumn(name = "username", referencedColumnName = "username")
+            })
     private List<User> user;
-    
-    @OneToMany(mappedBy = "community")
+
+    @OneToMany(mappedBy = "community", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Post> posts;
 
-    public void addUser(User users){
+    public void addUser(User users) {
         user.add(users);
     }
 

@@ -1,15 +1,8 @@
 package com.notify.NotifyEgerton.model;
 
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import lombok.*;
 
@@ -18,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "groups")
+@Table(name = "grps")
 public class Groups {
 
     @NotNull
@@ -39,21 +32,25 @@ public class Groups {
     @Column(name = "privacy")
     private String privacy;
 
-    @NotNull
+
     @Column(name = "description")
     private String description;
 
-    @ManyToMany
-    private List<User> users;
-    
-    @OneToMany(mappedBy = "group")
-    private List<Post> posts;
-    
     @NotNull
     private int count;
 
-    public void addUser(User user){
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "group_users", joinColumns = {
+            @JoinColumn(name = "group_id", referencedColumnName = "group_id") }, inverseJoinColumns = {
+                    @JoinColumn(name = "username", referencedColumnName = "username")
+            })
+    private List<User> users;
+
+    @OneToMany(mappedBy = "group")
+    private List<Post> posts;
+
+    public void addUser(User user) {
         users.add(user);
     }
-    
+
 }

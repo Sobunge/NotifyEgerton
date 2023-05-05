@@ -9,11 +9,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
@@ -33,7 +30,7 @@ public class WebSecurityConfig {
                                                 "select username as principal, password as credentials, true from user where username = ?")
                                 .authoritiesByUsernameQuery(
                                                 "select username as pricipal, role as role from user_roles where username = ? ")
-                                .passwordEncoder(passwordencoder()).rolePrefix("ROLE_");
+                                .passwordEncoder(new BCryptPasswordEncoder()).rolePrefix("ROLE_");
         }
 
         @Bean
@@ -65,7 +62,7 @@ public class WebSecurityConfig {
         }
 
         @Bean(name = "passordEncoder")
-        public PasswordEncoder passwordencoder() {
+        public BCryptPasswordEncoder passwordencoder() {
                 return new BCryptPasswordEncoder();
         }
 

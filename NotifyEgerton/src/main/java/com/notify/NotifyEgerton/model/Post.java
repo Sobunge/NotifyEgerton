@@ -35,10 +35,12 @@ public class Post {
     @CreationTimestamp
     private Date createDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_community")
     private Community community;
-    
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_group")
     private Groups group;
 
 }
