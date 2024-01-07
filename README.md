@@ -26,8 +26,9 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### Prerequisites
 
-- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html) - Ensure you have JDK 8 or later installed.
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/#java17) - Ensure you have JDK 17 installed.
 - [Maven](https://maven.apache.org/download.cgi) - Dependency management tool.
+- [MySQL Server](https://dev.mysql.com/downloads/mysql/) - Ensure you have MySQL server installed and database uni setup
 
 ### Installing
 
