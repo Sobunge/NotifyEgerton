@@ -50,3 +50,9 @@ Follow these instructions to get a copy of the project up and running on your lo
    java -jar target/notify-egerton-1.0.0.jar
 
 The application should now be running locally. Access it by navigating to 'http://localhost:8080' in your web browser.
+
+## Usage
+
+1. Register for an account or log in if you already have one.
+2. Explore the dashboard to view and post notifications.
+3. Choose the appropriate role (user or admin) to access specific features.
