@@ -48,3 +48,5 @@ Follow these instructions to get a copy of the project up and running on your lo
 6. Run the application:
    ```bash
    java -jar target/notify-egerton-1.0.0.jar
+
+The application should now be running locally. Access it by navigating to 'http://localhost:8080' in your web browser.
