@@ -9,7 +9,10 @@
     <packaging>jar</packaging>
 
     <name>NotifyEgerton</name>
-    <description>Demo project for Spring Boot</description>
+    <description>NotifyEgerton is a Spring Boot web application that facilitates 
+    communication among students and staff by allowing them to post and view notifications.
+     This platform aims to enhance information sharing within the Egerton University community.
+     </description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
