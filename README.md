@@ -35,3 +35,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
    ```bash
    git clone https://github.com/your-username/NotifyEgerton.git
+
+2. Navigate to the project directory:
+3. Build the project:
+4. Run the application:
