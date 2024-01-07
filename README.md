@@ -56,3 +56,21 @@ The application should now be running locally. Access it by navigating to 'http:
 1. Register for an account or log in if you already have one.
 2. Explore the dashboard to view and post notifications.
 3. Choose the appropriate role (user or admin) to access specific features.
+
+## Contributing
+
+If you'd like to contribute to this project, please follow these guidelines:
+
+1. Fork the repository.
+2. Create a new branch for your feature: git checkout -b feature-name.
+3. Commit your changes: git commit -m 'Add some feature'.
+4. Push to the branch: git push origin feature-name.
+5. Submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://mit-license.org/) file for details.
+
+## Acknowledgments
+
+- The NotifyEgerton team acknowledges the support and contributions from the Egerton University community.
