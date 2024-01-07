@@ -2,6 +2,16 @@
 
 NotifyEgerton is a Spring Boot web application that facilitates communication among students and staff by allowing them to post and view notifications. This platform aims to enhance information sharing within the Egerton University community.
 
+## Table of Contents
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installing](#installing)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
 ## Features
 
 - **User Authentication:** Secure access to the platform with user authentication.
