@@ -38,5 +38,13 @@ Follow these instructions to get a copy of the project up and running on your lo
    git clone https://github.com/Sobunge/NotifyEgerton.git
 
 2. Navigate to the project directory:
-3. Build the project:
-4. Run the application:
+   ```bash
+   cd NotifyEgerton
+   
+4. Build the project:
+   ```bash
+   mvn clean install
+  
+6. Run the application:
+   ```bash
+   java -jar target/notify-egerton-1.0.0.jar
